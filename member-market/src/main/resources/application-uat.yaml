@@ -1,0 +1,99 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.27.50.114:8848,172.27.50.115:8848,172.27.50.118:8848
+        namespace: 61ed89ac-c462-401d-afc1-3585c92dae08
+    sentinel:
+      transport:
+        dashboard: 172.27.50.118:18080
+  zipkin:
+    base-url: http://172.27.50.114:9411
+  data:
+    elasticsearch:
+      cluster-nodes: 172.27.50.114:9300,172.27.50.115:9300,172.27.50.118:9300
+      cluster-name: cls-pre
+  redis:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 100
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: 30000
+        #最大空闲
+        max-idle: 20
+        #最小空闲
+        min-idle: 8
+    timeout: 5000
+    database: 7
+    password: jsnx2017
+    sentinel:
+      master: mymaster
+      nodes: 172.27.50.114:28379,172.27.50.115:28379,172.27.50.118:28379
+  flyway:
+    baseline-on-migrate: false
+    enabled: false
+  shardingsphere:
+    # 数据源配置,可配置多个
+    dataSource:
+      names: master,slave
+      common:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      # 数据库读写分离-写数据源
+      master:
+        url: jdbc:mysql://172.27.50.67:3808/cls_market_etc?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        username: clspre
+        password: K&z7Yf8stZ%UOwBT
+      # 数据库读写分离-读数据源
+      slave:
+        url: jdbc:mysql://172.27.50.67:3808/cls_market_etc?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        username: clspre
+        password: K&z7Yf8stZ%UOwBT
+    rules:
+      replica-query:
+        data-sources:
+          readwrite:
+            name: readwrite # 读写分离逻辑数据源名称
+            primary-data-source-name: master
+            replica-data-source-names: slave
+            load-balancer-name: round_robin
+        load-balancers:
+          round-robin:
+            props:
+              default: 0 # 必须得有一个属性
+            type: ROUND_ROBIN
+    props:
+      sql.show: true
+http:
+  proxy:
+    enabled: true
+    host: 172.27.50.114
+    port: 8088
+
+build-in:
+  sys:
+    manager:
+      list:
+        - username: 18605376839
+
+yun-zhang-hu:
+  # 商户ID
+  dealer-id: 24420109
+  # 综合服务主体ID
+  broker-id: 27532644
+  # APP Key
+  app-key: L81EU8xJ0G6AWoVu9Vw99vjt2KehCxxx
+  # 3DES Key
+  three-des-key: 63KAw05v0fdu7E1ZA75Y6crQ
+  # 商户私钥,加签用
+  private-key-pem: XXXEwAIBADANBgkqhkiG9w0BAQEFAASCBKowggSmAgEAAoIBAQCo5gaYm8Tg3yFp/61zkmwSiG9Wcj+s7+1JZIMxGBvDJnGFyGV7xPc0fEPVoOvv+IZn39Pt/6LfJ5Cjm5Axfpz1YCyxDNc+OB7dXfLANXjFyiWoWOIsKnpzU1vM0Q8lOKYrp7D/QnSFRDJDaw8J7RffQLUByvrI2UM+t42L841aVpvJWdrjBlilepXkrGKxtMlVaQNgq+1SK5XsoebFkr5h3jCXTQoTTventZAJLCkPYNtmzYMCbRtqGTE0s81f0LvXomy/E/z/ArIpkm9kDqYv07JEuOjjzeSKqXZmpO8vBARRBoEtXRxv25xx59vdDj+Wwf0XFaM0Sn3OA4BLlYKhAgMBAAECggEBAI6OuPqOX7q+GuHxIGHwMK/j4LXCcORzDoFoCSOjCavKAv+8iYvSUCVIzai+zuYZiriaP7MelkZsirTNVQOxrqGdr5sxD2xAyixmY8LAX1Pyr55Mh3pn0DsPHOjffD0ad4dZXxfU66ygRxyIfIUQTZnub9k3jj2AxDVnkF2UELcyC4ko81TXSqvcPXDPPfrs7XyRgvMyIEOgbE4wKPDRLEzkmKN2rZ5QhA+BgUzBj04vn761jDRREn6Ec6OHj8cpJ5xtqBD3z9EtG7wsDvVeDJZw6H7FpFucu9ZDuhPc/kULbqcxRY5427xnfIbg2zpijrgP3haQ2rxa5rTT3j4ys5ECgYEA2tbKRJAc7oVODxB5dopeHkqV2ShE9NDl4l4xOteeCseUO3lzo8R1S0OheGVDBv+0iawHb4Wm3i/U2EkigZ7iBdVLCDfigHKqs16g0kuxHF6nsTmL6d0MgeKbdibhOV9n/sy8cf5BZKAzg4pCVVFxJ7nZqjcYmG75CzTHNHZ0opsCgYEAxZRCaL1OO3FactART4Pdng7+ogaLfz6SLI5dKgcMUUbe10s00xQx6IRpUSogbXYHqoncCUKfcaLwDZPATPZ7nDJDOyRb968tv0EWU516r3fFeNXL2aUsrrUpv6UMBqlDexw3VyQCLhPNYDOTX826x/QqN0M3elX/vaWSLUdJVXMCgYEAzY5J6gMQGf+/JalM3kr0QzG99X+83dTGyk29ok7cFbYIB6F6PM8RegPpzQQY5J8VfufHCDsbVcLKA+sWbXjHR8FkvDB6IjsTGm79UutkToierXqncKGA2RP5AQ9eKRzzu0OmktDHrfRIzvr0ed2JE06gJSGhibVbWupVX3MQ9ZcCgYEAtaDDI7HStwZPFXh8UVJxahlyrtPBbOnCSj9dGYN9KUIzHEtAdkH8VzlR75EAWl/EUFuG8ORT2ozkjDak8psrqrzx3O5htOFO9qAIvDjqTV+XIqu3R4518u0LQeehlIYJSKT5opuxfVYq2CLReaKP77xfCoo597YS8O3B4OnFWk0CgYEAoPmTfTDlbvcRCVsXKGeMyt2D98rhqPEZhHy9jCbalHOxlL/7PK5O+onKL7DRRiP7mAiiLc5cdhFJYM8lRbfy82Hloi8XvKajmeL4ROKHngDtRSxCWDZaoUwB540ywUlaaOwVDI81Yev5BbK+KdKtWYLgbe1K9IrhcizkoizBNSE=
+  # 云账户公钥,验签用
+  public-key-pem: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCdkrmRr3trl/ZwQG82dyfdcJARw7GIbdzytZeodHUndvgWKdeoUbiwfm0UHyPp3w8KwyBg9arzxFVufHcxKzI2jOz6DljI9Y7GlC0Lb7mcgIDWbFTPxAPK7rtpAwZOdchFKqbetR9eUQmhqc+2VjxE84bhuiLEqC1KfplGoOqyOwIDAQAB
+  # API
+  payment-api:
+    order-notify-url: https://clspre.cls999.com/clsapi/market/etc/app/withdraw/notify
+
+wechat:
+  appId: wx4965445e7f614xxx
+  secret: 24921c97f96cd05adf3f73ad6dd5cxxx

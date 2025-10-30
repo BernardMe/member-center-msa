@@ -1,0 +1,8 @@
+GET http://localhost:30000/sms/sendCode?phone=17621152225
+Accept: application/json
+
+###
+GET http://localhost:30000/sms/verifyCode?phone=17621152225&code=113917
+Accept: application/json
+
+###

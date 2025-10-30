@@ -1,0 +1,21 @@
+POST http://localhost:8081/clsapi/auth/fileUpload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+token: 123
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test.txt"
+
+< ./files/test.txt
+--WebAppBoundary--
+
+###
+POST http://localhost:8081/clsapi/fff/fileUpload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test.txt"
+
+< ./files/test.txt
+--WebAppBoundary--
+
+###

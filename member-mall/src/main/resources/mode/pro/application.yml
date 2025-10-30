@@ -1,0 +1,142 @@
+server:
+  port: 30000
+
+spring:
+  profiles:
+    active: pro
+  application:
+    name: member-auth
+  redis:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 100
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: 30000
+        #最大空闲
+        max-idle: 20
+        #最小空闲
+        min-idle: 8
+    timeout: 5000
+    database: 9
+    password: jsnx2017
+    sentinel:
+      master: mymaster
+      nodes: 172.27.50.68:26379,172.27.50.72:26379
+  zipkin:
+    base-url: http://172.27.50.98:9411
+    sender:
+      type: web
+    discovery-client-enabled: false
+  #采样取值介于 0到1之间，1则表示全部收集
+  sleuth:
+    sampler:
+      probability: 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.27.50.68:8848,172.27.50.70:8848,172.27.50.72:8848
+        namespace: 61ed89ac-c462-401d-afc1-3585c92dae08
+    sentinel:
+      transport:
+        dashboard: 172.27.50.98:18080
+  shardingsphere:
+    # 数据源配置,可配置多个
+    dataSource:
+      names: master,slave
+      common:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      # 数据库读写分离-读数据源
+      slave:
+        url: jdbc:mysql://clsetc.rwlb.rds.aliyuncs.com:3306/cheshun?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+        username: scls
+        password: OAzPkEm^2F
+      # 数据库读写分离-写数据源
+      master:
+        url: jdbc:mysql://clsetc.rwlb.rds.aliyuncs.com:3306/cheshun?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+        username: scls
+        password: OAzPkEm^2F
+    rules:
+      replica-query:
+        data-sources:
+          readwrite:
+            name: readwrite # 读写分离逻辑数据源名称
+            primary-data-source-name: master
+            replica-data-source-names: slave
+            load-balancer-name: round_robin
+        load-balancers:
+          round-robin:
+            props:
+              default: 0 # 必须得有一个属性
+            type: ROUND_ROBIN
+    props:
+      sql.show: true
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  type-enums-package: com.zzjdyf.*.entity
+  mapper-locations: classpath*:/mapper/*.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+proxy:
+  enabled: true
+  host: 172.27.50.53
+  port: 8088
+
+cheshun:
+  verify:
+    type: SHU_JU_BAO
+    bestsign:
+      url: http://www.baidu.com
+    shujubao:
+      secretKey: ntXIhXOSR3oK8xxx
+      namePhoneKey: 730ff1d8effc75119264c50d373b2xxx
+      namePhoneIdKey: 169b083c1c38d86e7a11b0bce2f1dxxx
+      url: http://api.chinadatapay.com/communication/personal
+  ocr:
+    url: http://172.27.50.59:5555
+  sms:
+    apcAuard: false
+    code:
+      frequencyTime: 30000
+    weight:
+      chengliye: 0
+      mengwang: 0
+      jumeng: 10
+    type: CHENG_LI_YE
+    codeContent: 【DSBetc】您好，您本次的验证码是000000，请勿泄露您收到的短信验证码。
+    chengliye:
+      url: https://www.sms-cly.cn/v7/msg/submit.json
+      userid: 'clycls'
+      pwd: 'ptg5mq'
+      testContent: 同事您好，感谢您对此次测试的配合。123456，此短信为CHENG_LI_YE测试使用，禁止商用。
+    mengwang:
+      code:
+        frequencyTime: 60000
+      url: http://172.27.50.93:9902/sms/v2/std/single_send
+      userid: 'WEB001'
+      pwd: '090917'
+      fixedStr: 1
+      testContent: 同事您好，感谢您对此次测试的配合。123456，此短信为MENG_WANG测试使用，禁止商用。
+    jumeng:
+      url: https://smsjm.jxtebie.com/sms/p2p
+      spid: '314081'
+      password: 'FL123456'
+      ac: '314081'
+      testContent: 此短信为聚梦短信测试使用。
+  # 自定义线程池参数
+  thread:
+    corePoolSize: 10
+    maxPoolSize: 20
+    keepAliveTime: 300

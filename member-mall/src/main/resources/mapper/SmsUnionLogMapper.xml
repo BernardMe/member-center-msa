@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zzjdyf.auth.dao.SmsUnionLogMapper">
+
+    <!-- 联合短信保存多条记录 -->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into
+        t_sms_union_log(mobile, content, state, seq_id, ds_time, ext, msg_id, result_status, status_des, business_src, sms_channel, create_time, update_time)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.mobile}, #{item.content}, #{item.state}, #{item.seqId}, #{item.dsTime}, #{item.ext}, #{item.msgId}, #{item.resultStatus},
+                #{item.statusDes}, #{item.businessSrc}, #{item.smsChannel}, #{item.createTime}, #{item.updateTime}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

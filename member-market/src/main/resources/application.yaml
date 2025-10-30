@@ -1,0 +1,117 @@
+server:
+  port: 22001
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: member-market
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  zipkin:
+    sender:
+      type: web
+    discovery-client-enabled: false
+  #采样取值介于 0到1之间，1则表示全部收集
+  sleuth:
+    sampler:
+      probability: 1
+  servlet:
+    multipart:
+      max-file-size: 30MB
+feign:
+  sentinel:
+    enabled: true
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  type-enums-package: com.zzjdyf.market.domain.entity.enums
+  mapper-locations: classpath*:/mapper/*.xml
+
+global:
+  redis-cache-ttl: 7d
+  start-query-first-consume-after-active: P1D
+  stop-query-first-consume-query-after-active: P30D
+  withdraw-max-times-of-day: 5
+  withdraw-sum-amount-of-day: 2000
+
+file:
+  mac:
+    path: file/
+  linux:
+    path: /nfs/cheshun/image/etc_market_image
+  windows:
+    path: D:\\server\\downloads\\dzypmis\\
+  maxSize: 100 # 文件大小 /M
+  qr-logo: classpath:qr_logo.png
+  qr-logo-ratio: 4
+  qr-height: 200
+  qr-width: 200
+  qr-margin: 0
+
+goods:
+  brand-list:
+    - name: 速通
+      enable: true
+      model-list:
+        - name: 速通1
+          enable: true
+
+schedule:
+  cron:
+    # 定时任务:查询提现订单信息,每隔5分钟执行一次
+    withdraw-order-query: 5 */5 * * * ?
+    withdraw-order-query-lock-time: PT4H
+    # 定时任务:同步ES交易记录,每隔5分钟执行一次
+    sync-es-trans: 15 */5 * * * ?
+    sync-es-trans-lock-time: PT4H
+    # 定时任务:查询首次消费信息,每天0点执行一次
+    first-consume-query: 25 0 0 * * ?
+    first-consume-query-lock-time: PT4H
+    # 定时任务:从发行方查询激活的ETC卡号信息,每隔5分钟执行一次
+    active-card-query: 35 */5 * * * ?
+    active-card-query-lock-time: PT4H
+    # 定时任务:结算ETC卡激活奖励,每隔5分钟执行一次
+    settle-active-bonus: 45 */5 * * * ?
+    settle-active-bonus-lock-time: PT4H
+    # 定时任务:结算ETC卡首次消费奖励,每隔5分钟执行一次
+    settle-first-consume-bonus: 55 */5 * * * ?
+    settle-first-consume-bonus-lock-time: PT4H
+    # 定时任务:代理商日统计,每隔6小时执行一次
+    agent-day-stats: 10 0 0,6,12,18 * * ?
+    agent-day-stats-lock-time: PT4H
+    # 定时任务:日统计,每隔6小时执行一次
+    day-stats: 20 0 0,6,12,18 * * ?
+    day-stats-lock-time: PT4H
+
+login:
+  token:
+    cache-prefix: 'login-token:'
+    cache-ttl: 60m
+    secret-key: ab8ce7528fc549e5b17b237a15e15850
+
+http:
+  proxy:
+    enabled: false
+    host:
+    port:
+
+captcha:
+  type: arithmetic
+  expiration: 2
+  width: 111
+  height: 36
+  length: 2
+  font-name:
+  font-size: 25
+  cache-prefix: 'captcha:'
+
+account:
+  name: 河南来顺商业保理有限公司
+  bank-name: 中国建设银行股份有限公司郑州铁路支行
+  account-number: 41050178360800000601

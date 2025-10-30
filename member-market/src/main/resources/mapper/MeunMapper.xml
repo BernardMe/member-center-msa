@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zzjdyf.market.domain.mapper.MeunMapper">
+
+    <resultMap id="MeunResult" type="com.zzjdyf.market.domain.entity.ClsMarketEtcMeun">
+        <id property="id" column="id" />
+        <result property="sort" column="sort" />
+        <result property="name" column="name" />
+        <result property="level" column="level" />
+        <result property="parentId" column="parent_id" />
+        <result property="leaf" column="leaf" />
+        <collection property="meunList" column="{parentId=id,roleId=role_id}"
+                    select="getByParentId" ofType="com.zzjdyf.market.domain.entity.ClsMarketEtcMeun" javaType="java.util.List">
+        </collection>
+    </resultMap>
+
+
+    <select id="findList" resultMap="MeunResult">
+        select * from cls_market_etc_meun t,cls_market_etc_role_meun r where 1 = 1
+        and r.role_id =#{roleId}
+        and t.id =r.meun_id
+        and t.level =1
+        order by sort asc
+    </select>
+
+    <select id="getByParentId"  resultMap="MeunResult">
+        select * from cls_market_etc_meun t,cls_market_etc_role_meun r  where t.parent_id = #{parentId}
+        and r.role_id =#{roleId}
+        and t.id =r.meun_id
+    </select>
+
+</mapper>

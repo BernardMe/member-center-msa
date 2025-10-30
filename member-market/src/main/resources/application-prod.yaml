@@ -1,0 +1,109 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.27.50.68:8848,172.27.50.70:8848,172.27.50.72:8848
+        namespace: 61ed89ac-c462-401d-afc1-3585c92dae08
+    sentinel:
+      transport:
+        dashboard: 172.27.50.98:18080
+  zipkin:
+    base-url: http://172.27.50.98:9411
+  data:
+    elasticsearch:
+      cluster-nodes: 172.27.50.98:9300,172.27.50.100:9300,172.27.50.102:9300
+      cluster-name: clsetc
+  redis:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 100
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: 30000
+        #最大空闲
+        max-idle: 20
+        #最小空闲
+        min-idle: 8
+    timeout: 5000
+    database: 7
+    password: jsnx2017
+    sentinel:
+      master: mymaster
+      nodes: 172.27.50.68:26379,172.27.50.72:26379
+  flyway:
+    baseline-on-migrate: true
+    enabled: false
+  shardingsphere:
+    # 数据源配置,可配置多个
+    dataSource:
+      names: master,slave
+      common:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      # 数据库读写分离-写数据源
+      master:
+        url: jdbc:mysql://clsetc.rwlb.rds.aliyuncs.com:3306/cls_market_etc?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        username: clsmarket
+        password: WrJ6^cGxIouP
+      # 数据库读写分离-读数据源
+      slave:
+        url: jdbc:mysql://172.27.50.80:3606/cls_market_etc?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        username: SelectUser
+        password: QueryPasswd
+    rules:
+      replica-query:
+        data-sources:
+          readwrite:
+            name: readwrite # 读写分离逻辑数据源名称
+            primary-data-source-name: master
+            replica-data-source-names: slave
+            load-balancer-name: round_robin
+        load-balancers:
+          round-robin:
+            props:
+              default: 0 # 必须得有一个属性
+            type: ROUND_ROBIN
+    props:
+      sql.show: true
+
+http:
+  proxy:
+    enabled: true
+    host: 172.27.50.53
+    port: 8088
+
+build-in:
+  sys:
+    manager:
+      list:
+        - username: 18605376839
+
+yun-zhang-hu:
+  # 商户ID
+  dealer-id: '00559774'
+  # 综合服务主体ID
+  broker-id: yiyun73
+  # APP Key
+  app-key: UcUaHnw4l4ktj0JTcToOmuB916D8gB2U
+  # 3DES Key
+  three-des-key: ZZB5CusGRxh0PBa324Pq15R9
+  # 商户公钥:
+  # -----BEGIN PUBLIC KEY-----
+  # MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6ysf0S5zGkik6BcWyo3T
+  # m6VSTBqDnvddTzTy2wNGNiFJJ5UEEAMl39X8HJy27q0SbnvJKb6pvBrNYchNMawc
+  # PRiAG+vSBbVwOp5dZYWTIV6gqXSX4nLsDZLAhyO9qKnqPU1MCBEbRj9jJ2FZsgvC
+  # AxYfUDNiFTv31HETeLin2MX4Zpc1cON4+UFZTqTPq4FgCxLDsVhM4Mhf+yJvCeJg
+  # jVfOYRC9CqI+c1ptB7lYG7hJcCcNewIaly8OR5TsQvHPts1HdIwOIJoH807kDd/2
+  # amyfuwhcrgjVHPHU+aoJkd1VoOIL0m92KJXJsnH75txpCArILnC9gWW+XW1Ro0cf
+  # CQIDAQAB
+  # -----END PUBLIC KEY-----
+  # 商户私钥,加签用
+  private-key-pem: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDrKx/RLnMaSKToFxbKjdObpVJMGoOe911PNPLbA0Y2IUknlQQQAyXf1fwcnLburRJue8kpvqm8Gs1hyE0xrBw9GIAb69IFtXA6nl1lhZMhXqCpdJficuwNksCHI72oqeo9TUwIERtGP2MnYVmyC8IDFh9QM2IVO/fUcRN4uKfYxfhmlzVw43j5QVlOpM+rgWALEsOxWEzgyF/7Im8J4mCNV85hEL0Koj5zWm0HuVgbuElwJw17AhqXLw5HlOxC8c+2zUd0jA4gmgfzTuQN3/ZqbJ+7CFyuCNUc8dT5qgmR3VWg4gvSb3Yolcmycfvm3GkICsgucL2BZb5dbVGjRx8JAgMBAAECggEANZ3pbSnn+FAjuP66pYfcfRoeP1e0NqQzVAHAdQq0EVdZdHrXKEdvdS82gdeBJb2z/Big7rGXxVlfBjJC11ZkQdG6M6N6iO6rHdJJfQINX4hRnREGKA0HoLiayLTvYusKitt6wEQWMdf15V6esqdXnpiGnyR38ltvz7HQPK/tJNDeQ8YRnBLoNDhyzhe76OEIFoHs4/0lH4Werfk/9PtKQm+JcSkm771SnfFbBmooydzNyXAPKBscSlk3r0EemrGEgqkSSfnj+BNCOaW0JXTQyGShI1l2xqNOYCMtcHfXIHsZ4gaHSgzNvy/k0CiFmzgjT1puz1yu/An2T6+tnY+4WQKBgQD33/LU9ptPhYgEI1Yu7RlwPcrBGBC0uajsmyn+ik1HgR1jQvTtcOIFrp6D1t4jGuBdluRD2yJ0qrmHnX3Mb/YkiiR9p/ywtQDQ1RAWrVS2CCjPzINDKPDpED523+8bW9mnweGDuE4O3apBrbm6pbjMWbsArVGi/qHpZgcBnl4jjwKBgQDy4IzHPQo9IrVXHPDGFUD1vN4jmSRZmzPnZ+vddbFHAMCsjasBlEOOett8xxd1w+0AMszVnV4d1D3X71PqEHQx+SF0zUbKdGsFExNs3VueLteKTc2JFnKbOd7kdoAI1H1rYEet4yqf3Z5DClnJvVtsCDrFhT34nAl0PXBu1lHn5wKBgQDjeEKyKLUSXuoZUgxO+Aq2NB6S4PDDyPU6XJJHIsgUbGp5owJ9u2/P4xVYy6AC+zEW8df8ZWbTRbEIwQCm0cBCe/tMzRJZX2GmQ0CGbv4kJoy9VWLICRQ77UpFcO9OXhX5mzTG2iXYApexuimNHXPfJCE2V9dpCt+u/pBDbf/aBQKBgELRgCl4I476M4WJ0rvMMRjqIvsMMLHuPvNU5dEBhgoQrPFL8FX44jUam7PSWiPuCQ/a6fuC1dfDAlib4Swt5qmw7oFh0C32pVK6EsgKhiAYpvfHu9oRMOp/m1CjQUosm2ylClNOgfWFVPsAp/8Wd0ZbZT/eDlSNKRSvqnTzxYjVAoGAAzqcu7j49Rf02FFGVq9rbPm2N/BnXuqOLc9lKVLtk9P2Js5nsriXZNIAPw+upyFO9nnezTN7DXW0OsDf7Au1OWG5jvWJOToZh8sa1KNsTmREWckfQI6sonAQtKW9Bf9RKJczu1AH1S5tHlOkmpchUwzL/irVWD46fFevp0OZ1x0=
+  # 云账户公钥,验签用
+  public-key-pem: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgeW1mbNQXMjl4K8Z+SeT0X+Md9gz97C6AFEDIGkGTB5KSclU+O4uzLrmu97nTGUnbQpFB9CP055H+hwyrU9mPQ5ySpeqrWCWFlDG/evkbQVbGZbNmqUyOVRCFMoLOR+6uBxv3X9EYqNOkpQBscxsIbgPpw61LIuLlA67dSyAriQIDAQAB
+  # API
+  payment-api:
+    order-notify-url: https://lj.laishunetc.cn/clsapi/market/etc/app/withdraw/notify
+wechat:
+  appId: wx4965445e7f614xxx
+  secret: 24921c97f96cd05adf3f73ad6dd5cxxx

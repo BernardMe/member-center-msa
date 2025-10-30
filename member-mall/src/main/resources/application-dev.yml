@@ -1,0 +1,174 @@
+server:
+  port: 23000
+  servlet:
+    context-path: /member-mall
+    session:
+      timeout: 30m
+feign:
+  circuitbreaker:
+    enabled: true
+  sentinel:
+    enabled: true
+  client:
+    config:
+      default:
+        connect-timeout: 10000
+        read-timeout: 10000
+
+spring:
+  application:
+    name: member-mall
+  redis:
+    host: 192.168.63.130
+    port: 6379
+    database: 5
+    password:
+#    sentinel:
+#      master:
+#      nodes:
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    sender:
+      type: web
+    discovery-client-enabled: false
+  data:
+    elasticsearch:
+      host: 192.168.63.130
+      port: 9200
+  #采样取值介于 0到1之间，1则表示全部收集
+  sleuth:
+    sampler:
+      probability: 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8858
+        namespace: 650fd323-0bc6-47ac-9594-25d07e490550
+        username: nacos
+        password: nacos
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8718
+  shardingsphere:
+    # 数据源配置,可配置多个
+    dataSource:
+      names: master,slave
+      common:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+      # 数据库读写分离-读数据源
+      slave:
+        url: jdbc:mysql://192.168.63.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        username: root
+        password: root
+      # 数据库读写分离-写数据源
+      master:
+        url: jdbc:mysql://192.168.63.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        username: root
+        password: root
+    rules:
+      replica-query:
+        data-sources:
+          readwrite:
+            name: readwrite # 读写分离逻辑数据源名称
+            primary-data-source-name: master
+            replica-data-source-names: slave
+            load-balancer-name: round_robin
+        load-balancers:
+          round-robin:
+            props:
+              default: 0 # 必须得有一个属性
+            type: ROUND_ROBIN
+    props:
+      sql.show: true
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  type-enums-package: com.cheshun.*.entity
+  mapper-locations: classpath*:/mapper/*.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    org:
+      redisson:
+        connection:
+          DNSMonitor: error
+    com:
+      alibaba:
+        nacos:
+          client:
+            naming: error
+
+proxy:
+  enabled: true
+  host: 172.27.50.53
+  port: 8088
+
+zzjdyf:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: zzjadmin
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: accessToken
+    user-secret-key: zzjmember
+    user-ttl: 7200000
+    user-token-name: accessToken
+  verify:
+    type: SHU_JU_BAO
+    bestsign:
+      url: http://www.baidu.com
+    shujubao:
+      secretKey: ntXIhXOSR3oK8xxx
+      namePhoneKey: 730ff1d8effc75119264c50d373b2xxx
+      namePhoneIdKey: 169b083c1c38d86e7a11b0bce2f1dxxx
+      url: http://api.chinadatapay.com/communication/personal
+  ocr:
+    url: http://172.27.50.59:5555
+  sms:
+    apcAuard: false
+    code:
+      frequencyTime: 30000
+    weight:
+      chengliye: 10
+      mengwang: 0
+      jumeng: 0
+    type: CHENG_LI_YE
+    codeContent: 【DSBetc】您好，您本次的验证码是000000，请勿泄露您收到的短信验证码。
+    chengliye:
+      url: https://www.sms-cly.cn/v7/msg/submit.json
+      userid: 'clycls'
+      pwd: 'ptg5mq'
+      testContent: 同事您好，感谢您对此次测试的配合。123456，此短信为CHENG_LI_YE测试使用，禁止商用。
+  wechat:
+    appid: wxb363a03fd14cfxxx  # 生产  wxb363a03fd14cf339
+    secret: 011a7e422510406be527b85c3a428xxx  # 生产 011a7e422510406be527b85c3a428xxx
+    mchid: 1561414331
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
+    privateKeyFilePath: D:\pay\apiclient_key.pem
+    apiV3Key: CZBK51236435wxpay435434323FFDxxx
+    weChatPayCertFilePath: D:\pay\wechatpay_166D96F876F45C7D07CE98952A96EC980368AXXX.pem
+    notifyUrl: https://58869fb.r2.cpolar.top/notify/paySuccess
+    refundNotifyUrl: https://58869fb.r2.cpolar.top/notify/refundSuccess
+  # 自定义线程池参数
+  thread:
+    corePoolSize: 10
+    maxPoolSize: 20
+    keepAliveTime: 300
+
+custom:
+  redis:
+    db6: 6
+    db7: 7
+    db8: 8

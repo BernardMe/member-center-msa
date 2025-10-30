@@ -1,0 +1,74 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: member-gateway
+  zipkin:
+    base-url: http://127.0.0.1:9411
+    sender:
+      type: web
+    discovery-client-enabled: false
+  #采样取值介于 0到1之间，1则表示全部收集
+  sleuth:
+    sampler:
+      probability: 1
+  redis:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 100
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: 2000
+        #最大空闲
+        max-idle: 500
+        #最小空闲
+        min-idle: 8
+    timeout: 5000
+    database: 0
+    password: jsnx2017
+#    sentinel:
+#      master: mymaster
+#      nodes: 172.27.50.66:27379
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8858
+        namespace: 650fd323-0bc6-47ac-9594-25d07e490550
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8718
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+
+
+no-encryption-url:
+  paths:
+    - upload
+    - download
+    - export
+    - import
+    - notify
+
+cheshun:
+  submitToken:
+    #防重提交 60s
+    frequencyTime: 60000
+  publicKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCZloNjfRrS+jKMEgnEEHbEkrvrA1XmG8BzN+O+ELck9Q3vRWk824ulv/QepUdtqeE7psLu7Z/CT3GeHiHG83OsQghk4gOX+hoiAmitQIU0tbmoSNbufCJprW5w2hckqI44uDeDneVV73NyTx538E3d26cIp3X8xH1TmBzsB74OEwIDAQAB
+  privateKey: MIICXQIBAAKBgQCZloNjfRrS+jKMEgnEEHbEkrvrA1XmG8BzN+O+ELck9Q3vRWk824ulv/QepUdtqeE7psLu7Z/CT3GeHiHG83OsQghk4gOX+hoiAmitQIU0tbmoSNbufCJprW5w2hckqI44uDeDneVV73NyTx538E3d26cIp3X8xH1TmBzsB74OEwIDAQABAoGAC8Rgpm+WoNTP3ADWMOhzNdLpXqaZRX5MntpvDCG7HmcMailFWFPLxBp/HHzDCoLDwZTtUqGJcwYwj5HO1BYH5etIFy9/IC0in/VM9a0OxRxpUu0rur/b4tFLCd+9YuBAIoRcUM7aiEBN8Ii5aPABq53iYwFeJz8iryREASQxAA0CQQDmmQqSuLgkVxpo3M0JZtqLMB9zDa654vgIcHXeHYLTldWn+uD79lIzY6B/bDL8GgFHLnsqa84QJowkyTue1HJtAkEAqoHCjdMnM1L10fCXraQEA07HE+IATGzWQQNYfyalV8gR/h7KVLcNqiLQh0E+NTFLwTW+IAz1218UokgW9gAyfwJBAIzB9lZBMwXbtV81CGMoyVYU9d2BCJqnFMfx/cCrOuR0nYp/9T1Xyi1cLugY37ZLGWSd1si6LXpmTT1XKHF3NLECQFb8H97uq/75AcN6tEa3d/ygAdvY3kIe/CbqqAkmFA/2V4eG+b3CLUxwumVmGXBVl8oXusjrE7o4hXRMxrn1W80CQQC60g6ShrSzPk9j3tkFdfa1M0D6YeAfKEDROknXspu8PNFomVlBnr7RNGu52LQ9iOEidfKX5593S8gEx5+mNr08
+  publicKeys:
+    #web: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDiXT1KMkVl7sa6E7/uYwmz1iNKaokKVmFr0oJ1ahoUH9bykGZVTbf8d1Zkbzo3d0HCOcZtyBcxCvaR63Bj65hKUOhK7RzEgL/n5x/MwBOqn8M5AXMSN6mvzrjnaXzDRqEo+wdPatJuMDwfC9Ckvky+UIjnMdNYPOwn24cjZ31OfwIDAQAB
+    #pkcs1
+    web: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCHyO2vFQK1bW6EIgE7thEzUQTgAXqYdlh1Cu0NkH2K3aQVoOWh4LM7EFFgt+icRY2ysg7YkMXShhFnPO/dwqtzd4/xNV5wy4npVZmc4omtyK6u9yoa/pp2m7DI5WG/Tpb//u0AgnAUJQVlAZ0uCZ/shTXfc0gzvNcaCT28y+8zmQIDAQAB
+    ios: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCHyO2vFQK1bW6EIgE7thEzUQTgAXqYdlh1Cu0NkH2K3aQVoOWh4LM7EFFgt+icRY2ysg7YkMXShhFnPO/dwqtzd4/xNV5wy4npVZmc4omtyK6u9yoa/pp2m7DI5WG/Tpb//u0AgnAUJQVlAZ0uCZ/shTXfc0gzvNcaCT28y+8zmQIDAQAB
+    ST: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDiXT1KMkVl7sa6E7/uYwmz1iNKaokKVmFr0oJ1ahoUH9bykGZVTbf8d1Zkbzo3d0HCOcZtyBcxCvaR63Bj65hKUOhK7RzEgL/n5x/MwBOqn8M5AXMSN6mvzrjnaXzDRqEo+wdPatJuMDwfC9Ckvky+UIjnMdNYPOwn24cjZ31OfwIDAQAB
+    android: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCHyO2vFQK1bW6EIgE7thEzUQTgAXqYdlh1Cu0NkH2K3aQVoOWh4LM7EFFgt+icRY2ysg7YkMXShhFnPO/dwqtzd4/xNV5wy4npVZmc4omtyK6u9yoa/pp2m7DI5WG/Tpb//u0AgnAUJQVlAZ0uCZ/shTXfc0gzvNcaCT28y+8zmQIDAQAB
+    wx: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDhfc6HuQALxxFIMuShXE/x1a+Hi8qxqZ5wM7Fj257L+170O22f/q5dcSIJPhlgLagYsuTPLl/2L4PLGnCiP9PssIiN5XIkeTwl4qhFJh2JWPB1a0sRUldX/VrIJbIIKAt6LBhwAytZ+cExzA959tMMdovevacSZIDRt8ZXcVh8dQIDAQAB
