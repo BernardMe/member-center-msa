@@ -95,6 +95,11 @@ public class EsSkuInfo {
      */
     private Byte isDefault;
     /**
+     * 是否B2C
+     */
+    @Field(type = FieldType.Integer)
+    private Byte isB2c;
+    /**
      * SPU_ID
      */
     @Field(type = FieldType.Keyword)
@@ -138,6 +143,15 @@ public class EsSkuInfo {
             searchAnalyzer = "ik_smart"  // 搜索时分词（粗粒度）
     )
     private String symptoms;
+    /**
+     * 门店编码（多个用逗号拼接）
+     */
+    @Field(
+            type = FieldType.Text,
+            analyzer = "ik_max_word",  // 索引时分词（细粒度）
+            searchAnalyzer = "ik_smart"  // 搜索时分词（粗粒度）
+    )
+    private String subbhStr;
 
     // Getters and Setters
 
@@ -230,6 +244,14 @@ public class EsSkuInfo {
         this.isDefault = isDefault;
     }
 
+    public Byte getIsB2c() {
+        return isB2c;
+    }
+
+    public void setIsB2c(Byte isB2c) {
+        this.isB2c = isB2c;
+    }
+
     public String getSpuId() {
         return spuId;
     }
@@ -292,5 +314,13 @@ public class EsSkuInfo {
 
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
+    }
+
+    public String getSubbhStr() {
+        return subbhStr;
+    }
+
+    public void setSubbhStr(String subbhStr) {
+        this.subbhStr = subbhStr;
     }
 }

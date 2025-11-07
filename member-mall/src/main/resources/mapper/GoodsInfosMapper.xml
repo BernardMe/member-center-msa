@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzjdyf.mall.domain.mapper.GoodsInfosMapper">
+
+    <resultMap id="BaseResultMap" type="com.zzjdyf.mall.domain.entity.GoodsInfos">
+        <id property="goodsId" column="goods_id" jdbcType="INTEGER"/>
+        <result property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="subTitle" column="sub_title" jdbcType="VARCHAR"/>
+        <result property="specification" column="specification" jdbcType="VARCHAR"/>
+        <result property="drugDescription" column="drug_description" jdbcType="VARCHAR"/>
+        <result property="drugApprovalNo" column="drug_approval_no" jdbcType="VARCHAR"/>
+        <result property="dosageForm" column="dosage_form" jdbcType="VARCHAR"/>
+        <result property="manufacturer" column="manufacturer" jdbcType="VARCHAR"/>
+        <result property="originAddress" column="origin_address" jdbcType="VARCHAR"/>
+        <result property="ean13" column="ean13" jdbcType="VARCHAR"/>
+        <result property="drugCategory" column="drug_category" jdbcType="VARCHAR"/>
+        <result property="isBonded" column="is_bonded" jdbcType="TINYINT"/>
+        <result property="coverImage" column="cover_image" jdbcType="VARCHAR"/>
+        <result property="mainImage" column="main_image" jdbcType="VARCHAR"/>
+        <result property="images" column="images" jdbcType="VARCHAR"/>
+        <result property="context" column="context" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="drugCarousel" column="drug_carousel" jdbcType="VARCHAR"/>
+        <result property="createtime" column="createtime" jdbcType="TIMESTAMP"/>
+        <result property="modifytime" column="modifytime" jdbcType="TIMESTAMP"/>
+        <result property="goodsKeywords" column="goods_keywords" jdbcType="VARCHAR"/>
+        <result property="spu" column="spu" jdbcType="VARCHAR"/>
+        <result property="sku" column="sku" jdbcType="VARCHAR"/>
+        <result property="retailPrice" column="retail_price" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        goods_id,goods_code,product_name,sub_title,
+        specification,drug_description,drug_approval_no,
+        dosage_form,manufacturer,origin_address,
+        ean13,drug_category,is_bonded,
+        cover_image,main_image,images,context,
+        status,drug_carousel,createtime,
+        modifytime,goods_keywords,spu,sku,retail_price
+    </sql>
+
+    <select id="selectImportGoodsForSku" resultType= "com.zzjdyf.mall.domain.entity.GoodsInfos" >
+        SELECT gi.goods_id goodsId,
+               gi.goods_code goodsCode,
+               gi.product_name productName,
+               gi.sub_title subTitle,
+               gi.specification specification,
+               gi.drug_description drugDescription,
+               gi.drug_approval_no drugApprovalNo,
+               gi.dosage_form dosageForm,
+               gi.manufacturer manufacturer,
+               gi.origin_address originAddress,
+               gi.ean13 ean13,
+               gi.drug_category drugCategory,
+               gi.is_bonded isBonded,
+               gi.cover_image coverImage,
+               gi.main_image mainImage,
+               gi.images images,
+               gi.status status,
+               gi.drug_carousel drugCarousel,
+               gi.createtime createtime,
+               gi.modifytime modifytime,
+               gi.goods_keywords goodsKeywords,
+               gi.spu spu,
+               gi.sku sku,
+               gi.retail_price retailPrice
+        FROM goods_infos gi
+        WHERE gi.status = 1
+    </select>
+
+</mapper>

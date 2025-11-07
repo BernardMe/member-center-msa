@@ -40,6 +40,10 @@ public class EsSkuInfoPO {
      */
     private Byte status;
     /**
+     * 是否B2C
+     */
+    private Byte isB2c;
+    /**
      * 创建时间Str
      */
     private String createTimeStr;
@@ -83,4 +87,8 @@ public class EsSkuInfoPO {
      * 适用症状（，多个用逗号分隔）
      */
     private String symptoms;
+    /**
+     * 门店编码，多个用逗号分隔
+     */
+    private String subbhStr;
 }

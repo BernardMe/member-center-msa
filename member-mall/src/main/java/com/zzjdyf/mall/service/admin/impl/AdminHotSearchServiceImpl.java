@@ -7,7 +7,7 @@ import com.zzjdyf.common.component.page.PageCondition;
 import com.zzjdyf.common.result.Result;
 import com.zzjdyf.common.tools.utils.ResultUtil;
 import com.zzjdyf.mall.domain.entity.EsHotSearch;
-import com.zzjdyf.mall.service.HotSearchRepository;
+import com.zzjdyf.mall.domain.dao.HotSearchRepository;
 import com.zzjdyf.mall.service.admin.AdminHotSearchService;
 import com.zzjdyf.mall.vo.dto.ESHotSearchVO;
 import com.zzjdyf.mall.vo.dto.HotSearchPO;

@@ -1,4 +1,4 @@
-package com.zzjdyf.mall.service;
+package com.zzjdyf.mall.domain.dao;
 
 import com.zzjdyf.mall.domain.entity.EsHotSearch;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
