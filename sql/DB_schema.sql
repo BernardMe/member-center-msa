@@ -209,6 +209,30 @@ create index c_medical_equipment_category_category_code
     on c_medical_equipment_category (category_code);
 
 
+create table c_medical_equipment_video
+(
+    id			int auto_increment comment '视频id'
+           primary     key,
+    equipment_id   int                         comment '器械id',
+    goods_code      VARCHAR(50)  not null      comment '货号',
+    thumbnail_image varchar(1500)              comment '缩略图url',
+    video_url       varchar(1500)              comment '视频ossUrl',
+    remark          varchar(255)               comment '备注说明',
+    category_code   char(20)                   comment '目录编码',
+    category_name   varchar(50)                comment '目录名称',
+    click_num       int                        comment '点击次数',
+    status          tinyint                    comment '状态(0禁用, 1正常)',
+    create_time     datetime                   comment '创建时间',
+    update_time     datetime     null          comment '修改时间',
+    constraint c_medical_equipment_video
+        unique (goods_code)
+)
+    comment '医疗器械视频表';
+
+create index c_medical_equipment_video_idx_goods_code
+    on c_medical_equipment_video (goods_code);
+
+
 create table c_medical_equipment
 (
     id			int auto_increment comment 'id'

@@ -51,9 +51,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RespEncryptFilter implements GlobalFilter, Ordered {
 
-    private final cheshunKeyConfigProperties cheshunKeyConfigProperties;
+    private final CheshunKeyConfigProperties cheshunKeyConfigProperties;
 
-    private final cheshunNoEncryptionPathsProperties cheshunNoEncryptionPathsProperties;
+    private final CheshunNoEncryptionPathsProperties cheshunNoEncryptionPathsProperties;
 
     private String tokenHeader = "token";
 

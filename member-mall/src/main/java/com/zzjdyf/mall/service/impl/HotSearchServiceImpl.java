@@ -2,19 +2,13 @@ package com.zzjdyf.mall.service.impl;
 
 import com.zzjdyf.common.result.Result;
 import com.zzjdyf.common.tools.utils.ResultUtil;
-import com.zzjdyf.mall.domain.entity.ESHotSearch;
+import com.zzjdyf.mall.domain.entity.EsHotSearch;
 import com.zzjdyf.mall.service.HotSearchService;
 import com.zzjdyf.mall.vo.dto.HotSearchPO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.BucketOrder;
-import org.elasticsearch.search.aggregations.bucket.terms.Terms;
-import org.elasticsearch.search.aggregations.metrics.ParsedSum;
-import org.elasticsearch.search.aggregations.metrics.Sum;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +21,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 计算热搜词及热度Service
@@ -75,15 +68,15 @@ public class HotSearchServiceImpl implements HotSearchService {
                     .build();
 
             // 执行查询
-            SearchHits<ESHotSearch> searchHits = elasticsearchOperations.search(queryBuilder, ESHotSearch.class);
-            SearchPage<ESHotSearch> page = SearchHitSupport.searchPageFor(searchHits, queryBuilder.getPageable());
+            SearchHits<EsHotSearch> searchHits = elasticsearchOperations.search(queryBuilder, EsHotSearch.class);
+            SearchPage<EsHotSearch> page = SearchHitSupport.searchPageFor(searchHits, queryBuilder.getPageable());
 
             logger.info("Total hits: " + searchHits.getTotalHits());
 
 
-            List<ESHotSearch> pageContentList = new ArrayList<>();
-            for (SearchHit<ESHotSearch> searchHit : searchHits) {
-                ESHotSearch dto = searchHit.getContent();
+            List<EsHotSearch> pageContentList = new ArrayList<>();
+            for (SearchHit<EsHotSearch> searchHit : searchHits) {
+                EsHotSearch dto = searchHit.getContent();
                 pageContentList.add(dto);
             }
 
@@ -129,7 +122,7 @@ public class HotSearchServiceImpl implements HotSearchService {
      * @param item
      * @param po
      */
-    private void copyDto2Po(ESHotSearch item, HotSearchPO po) {
+    private void copyDto2Po(EsHotSearch item, HotSearchPO po) {
         //po.setConfigId(configDTO.getConfigId());
         po.setId(item.getId());
         po.setWords(item.getWords());

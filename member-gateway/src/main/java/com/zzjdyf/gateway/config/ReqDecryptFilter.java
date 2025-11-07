@@ -70,9 +70,9 @@ public class ReqDecryptFilter implements GlobalFilter, Ordered {
     @Value("${cheshun.submitToken.frequencyTime:60000}")
     private Integer frequencyTime;
 
-    private final cheshunKeyConfigProperties cheshunKeyConfigProperties;
+    private final CheshunKeyConfigProperties cheshunKeyConfigProperties;
 
-    private final cheshunNoEncryptionPathsProperties cheshunNoEncryptionPathsProperties;
+    private final CheshunNoEncryptionPathsProperties cheshunNoEncryptionPathsProperties;
 
 
     private final RedisService redisService;

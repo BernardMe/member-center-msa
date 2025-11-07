@@ -14,7 +14,7 @@ import java.util.Map;
 @ToString
 @RefreshScope
 @ConfigurationProperties(prefix = "cheshun")
-public class cheshunKeyConfigProperties {
+public class CheshunKeyConfigProperties {
     private String publicKey;
 
     private String privateKey;

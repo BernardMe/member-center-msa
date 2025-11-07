@@ -2,7 +2,7 @@ package com.zzjdyf.mall.service.admin;
 
 import com.zzjdyf.common.component.page.PageCondition;
 import com.zzjdyf.common.result.Result;
-import com.zzjdyf.mall.domain.entity.ESHotSearch;
+import com.zzjdyf.mall.domain.entity.EsHotSearch;
 import com.zzjdyf.mall.vo.dto.ESHotSearchVO;
 
 import java.util.List;
@@ -60,5 +60,5 @@ public interface AdminHotSearchService {
      * 管理端：商品批量删除
      * @param ESGoodsSearchDTOs
      */
-    void batchDelete(List<ESHotSearch> ESGoodsSearchDTOs);
+    void batchDelete(List<EsHotSearch> ESGoodsSearchDTOs);
 }

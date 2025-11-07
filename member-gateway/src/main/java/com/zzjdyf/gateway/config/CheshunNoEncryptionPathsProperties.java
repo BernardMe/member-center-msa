@@ -18,7 +18,7 @@ import java.util.List;
 @ToString
 @RefreshScope
 @ConfigurationProperties(prefix = "no-encryption-url")
-public class cheshunNoEncryptionPathsProperties {
+public class CheshunNoEncryptionPathsProperties {
 
     private List<String> paths;
 }

@@ -1,26 +1,19 @@
 package com.zzjdyf.mall.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * SkuInfo 实体类来表示搜索日志
+ * HotSearch 实体类来表示搜索日志
  * @author wangzhuo
  * @date 20251025
  */
-@Document(indexName = "zzjdyf_sku_info")
-public class ESSkuInfo {
+@Document(indexName = "zzjdyf_hot_search")
+public class EsHotSearch {
 
     /**
      * 指定主键
@@ -64,21 +57,6 @@ public class ESSkuInfo {
      */
     @Field(type = FieldType.Integer)
     private int clickCount;
-    /**
-     * 只用后两个注解就可以实现LocalDateTime不分成多个Field，但是格式不对。
-     * 所以还需要添加前面两个注解去指定格式与时区
-     **/
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss || yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime createTime;//创建时间
-
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss || yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @JsonSerialize(using = LocalDateTimeSerializer.class)
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime updateTime;//更新时间
 
     // Getters and Setters
 

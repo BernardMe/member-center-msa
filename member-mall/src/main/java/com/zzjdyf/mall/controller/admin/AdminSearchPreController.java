@@ -3,17 +3,14 @@ package com.zzjdyf.mall.controller.admin;
 import com.zzjdyf.common.annotation.PageInfoParam;
 import com.zzjdyf.common.component.page.PageCondition;
 import com.zzjdyf.common.result.Result;
-import com.zzjdyf.mall.domain.entity.ESHotSearch;
 import com.zzjdyf.mall.service.admin.AdminHotSearchService;
 import com.zzjdyf.mall.vo.dto.ESHotSearchVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * 后管接口-商城首页热搜

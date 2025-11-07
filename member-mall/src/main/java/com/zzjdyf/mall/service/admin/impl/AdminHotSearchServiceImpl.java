@@ -6,7 +6,7 @@ import com.zzjdyf.common.api.web.http.common.ListResult;
 import com.zzjdyf.common.component.page.PageCondition;
 import com.zzjdyf.common.result.Result;
 import com.zzjdyf.common.tools.utils.ResultUtil;
-import com.zzjdyf.mall.domain.entity.ESHotSearch;
+import com.zzjdyf.mall.domain.entity.EsHotSearch;
 import com.zzjdyf.mall.service.HotSearchRepository;
 import com.zzjdyf.mall.service.admin.AdminHotSearchService;
 import com.zzjdyf.mall.vo.dto.ESHotSearchVO;
@@ -16,10 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.*;
@@ -58,7 +55,7 @@ public class AdminHotSearchServiceImpl implements AdminHotSearchService {
     public Result add(ESHotSearchVO esHotSearchVO) {
         try {
 
-            ESHotSearch esHotSearch = new ESHotSearch();
+            EsHotSearch esHotSearch = new EsHotSearch();
             copyVo2Dto(esHotSearchVO, esHotSearch);
             hotSearchRepository.save(esHotSearch);
             return SU;
@@ -80,7 +77,7 @@ public class AdminHotSearchServiceImpl implements AdminHotSearchService {
                 log.error("热搜词id不能为空 ");
                 return ResultUtil.result(ERR_CODE,"热搜词id不能为空！");
             }
-            ESHotSearch esHotSearch = hotSearchRepository.findById(esHotSearchVO.getId())
+            EsHotSearch esHotSearch = hotSearchRepository.findById(esHotSearchVO.getId())
                     .orElse(null);
             if (null == esHotSearch) {
                 log.error("后管-根据id更新单个热搜词， id={} 热搜词不存在", esHotSearchVO);
@@ -145,12 +142,12 @@ public class AdminHotSearchServiceImpl implements AdminHotSearchService {
                     .build();
 
             // 执行查询
-            SearchHits<ESHotSearch> searchHits = elasticsearchTemplate.search(query, ESHotSearch.class);
-            SearchPage<ESHotSearch> page = SearchHitSupport.searchPageFor(searchHits, query.getPageable());
+            SearchHits<EsHotSearch> searchHits = elasticsearchTemplate.search(query, EsHotSearch.class);
+            SearchPage<EsHotSearch> page = SearchHitSupport.searchPageFor(searchHits, query.getPageable());
 
-            List<ESHotSearch> pageContentList = new ArrayList<>();
-            for (SearchHit<ESHotSearch> searchHit : searchHits) {
-                ESHotSearch dto = searchHit.getContent();
+            List<EsHotSearch> pageContentList = new ArrayList<>();
+            for (SearchHit<EsHotSearch> searchHit : searchHits) {
+                EsHotSearch dto = searchHit.getContent();
                 pageContentList.add(dto);
             }
 
@@ -194,7 +191,7 @@ public class AdminHotSearchServiceImpl implements AdminHotSearchService {
                 log.error("热搜词id不能为空 ");
                 return ResultUtil.result(ERR_CODE,"热搜词id不能为空！");
             }
-            ESHotSearch esHotSearch = hotSearchRepository.findById(esHotSearchVO.getId())
+            EsHotSearch esHotSearch = hotSearchRepository.findById(esHotSearchVO.getId())
                     .orElse(null);
             if (null == esHotSearch) {
                 log.error("后管-根据id删除单个热搜词， id={} 热搜词不存在", esHotSearchVO);
@@ -210,7 +207,7 @@ public class AdminHotSearchServiceImpl implements AdminHotSearchService {
     }
 
     @Override
-    public void batchDelete(List<ESHotSearch> ESGoodsSearchDTOs) {
+    public void batchDelete(List<EsHotSearch> ESGoodsSearchDTOs) {
 
 
 
@@ -221,7 +218,7 @@ public class AdminHotSearchServiceImpl implements AdminHotSearchService {
      * @param item
      * @param po
      */
-    private void copyDto2Po(ESHotSearch item, HotSearchPO po) {
+    private void copyDto2Po(EsHotSearch item, HotSearchPO po) {
         //po.setConfigId(configDTO.getConfigId());
         po.setId(item.getId());
         po.setGoodsName(item.getGoodsName());
@@ -239,7 +236,7 @@ public class AdminHotSearchServiceImpl implements AdminHotSearchService {
      * @param dto
      * @param vo
      */
-    private void copyVo2Dto(ESHotSearchVO vo, ESHotSearch dto) {
+    private void copyVo2Dto(ESHotSearchVO vo, EsHotSearch dto) {
         //po.setConfigId(configDTO.getConfigId());
         dto.setId(vo.getId());
         dto.setGoodsName(vo.getGoodsName());
