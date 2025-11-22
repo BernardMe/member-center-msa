@@ -1,7 +1,7 @@
 package com.zzjdyf.customer.controller;
 
-import com.zzjdyf.common.exception.BizCodeEnum;
-import com.zzjdyf.common.tools.utils.R;
+import com.cheshun.common.exception.BizCodeEnum;
+import com.cheshun.common.tools.utils.R;
 import com.zzjdyf.customer.service.CustomerService;
 import com.zzjdyf.customer.service.CustomerStrategy;
 import com.zzjdyf.customer.vo.CustomerBean;

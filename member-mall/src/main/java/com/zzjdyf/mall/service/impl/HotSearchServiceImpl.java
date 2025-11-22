@@ -1,7 +1,7 @@
 package com.zzjdyf.mall.service.impl;
 
-import com.zzjdyf.common.result.Result;
-import com.zzjdyf.common.tools.utils.ResultUtil;
+import com.cheshun.common.result.Result;
+import com.cheshun.common.tools.utils.ResultUtil;
 import com.zzjdyf.mall.domain.entity.EsHotSearch;
 import com.zzjdyf.mall.service.HotSearchService;
 import com.zzjdyf.mall.vo.dto.HotSearchPO;

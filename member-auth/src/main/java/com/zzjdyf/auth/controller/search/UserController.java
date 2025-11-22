@@ -3,8 +3,8 @@ package com.zzjdyf.auth.controller.search;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.zzjdyf.auth.service.user.login.UserService;
 import com.zzjdyf.auth.vo.dto.*;
-import com.zzjdyf.common.annotation.MemberBaseParam;
-import com.zzjdyf.common.result.Result;
+import com.cheshun.common.annotation.MemberBaseParam;
+import com.cheshun.common.result.Result;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

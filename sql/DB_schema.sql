@@ -209,30 +209,6 @@ create index c_medical_equipment_category_category_code
     on c_medical_equipment_category (category_code);
 
 
-create table c_medical_equipment_video
-(
-    id			int auto_increment comment '视频id'
-           primary     key,
-    equipment_id   int                         comment '器械id',
-    goods_code      VARCHAR(50)  not null      comment '货号',
-    thumbnail_image varchar(1500)              comment '缩略图url',
-    video_url       varchar(1500)              comment '视频ossUrl',
-    remark          varchar(255)               comment '备注说明',
-    category_code   char(20)                   comment '目录编码',
-    category_name   varchar(50)                comment '目录名称',
-    click_num       int                        comment '点击次数',
-    status          tinyint                    comment '状态(0禁用, 1正常)',
-    create_time     datetime                   comment '创建时间',
-    update_time     datetime     null          comment '修改时间',
-    constraint c_medical_equipment_video
-        unique (goods_code)
-)
-    comment '医疗器械视频表';
-
-create index c_medical_equipment_video_idx_goods_code
-    on c_medical_equipment_video (goods_code);
-
-
 create table c_medical_equipment
 (
     id			int auto_increment comment 'id'
@@ -261,6 +237,32 @@ create table c_medical_equipment
 
 create index c_medical_equipment_idx_goods_code
     on c_medical_equipment (goods_code);
+
+
+create table c_medical_equipment_video
+(
+    id			int auto_increment comment '视频id'
+           primary     key,
+    equipment_id   int                         comment '器械id',
+    goods_code      VARCHAR(50)  not null      comment '货号',
+    equipment_name  varchar(50)   null         comment '器械名称',
+    oss_object_name varchar(1000) null         comment 'OSS对象名',
+    thumbnail_image varchar(1500)              comment '缩略图url',
+    video_url       varchar(1500)              comment '视频ossUrl',
+    remark          varchar(255)               comment '备注说明',
+    category_code   char(20)                   comment '目录编码',
+    category_name   varchar(50)                comment '目录名称',
+    click_num       int                        comment '点击次数',
+    status          tinyint                    comment '状态(0禁用, 1正常)',
+    create_time     datetime                   comment '创建时间',
+    update_time     datetime     null          comment '修改时间',
+    constraint c_medical_equipment_video
+        unique (goods_code)
+)
+    comment '医疗器械视频表';
+
+create index c_medical_equipment_video_idx_goods_code
+    on c_medical_equipment_video (goods_code);
 
 
 create table c_wzsurvey_coupon_record
@@ -640,7 +642,7 @@ create index plat_plantation_config_data_config_id_index
 
 create table plat_plantation_drip_record
 (
-    id          int auto_increment comment '主键'               
+    id          int auto_increment comment '主键'
         primary key,
     task_id     int          null comment '任务id',
     drip_num    smallint(6)  null comment '水滴克数(含正负)',
@@ -1041,4 +1043,48 @@ CREATE TABLE mall_sku_info (
   KEY idx_search_count (search_count),
   KEY idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商城热搜词总表';
+
+
+create table goods_infos
+(
+    goods_id         int auto_increment comment '商品主键'
+        primary key,
+    goods_code       varchar(30)                            not null comment '商品货号',
+    product_name     varchar(200)                           not null comment '商品名称',
+    sub_title        varchar(200)                           null comment '副标题/描述',
+    specification    varchar(100)                           null comment '规格',
+    drug_description varchar(1000)                          null comment '药品性状',
+    drug_approval_no varchar(255)                           null comment '批准文号',
+    dosage_form      varchar(50)                            null comment '剂型',
+    manufacturer     varchar(255)                           null comment '厂家',
+    origin_address   varchar(255)                           null comment '产地',
+    ean13            varchar(255)                           null comment '商品69码',
+    drug_category    varchar(255) default '0'               null comment '药品类别',
+    retail_price     int                                    null comment '零售价(单位厘)',
+    is_bonded        tinyint(1)   default 0                 null comment '是否保税仓',
+    cover_image      varchar(255)                           null comment '首页图',
+    main_image       varchar(200)                           null comment '主图',
+    images           text                                   null comment '商品明细图集',
+    context          text                                   null comment '富文本',
+    status           tinyint      default 1                 null comment '状态：0-下架，1-上架',
+    drug_carousel    text                                   null comment '轮播图集',
+    createtime       datetime     default CURRENT_TIMESTAMP null comment '创建时间',
+    modifytime       datetime     default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP comment '修改时间',
+    goods_keywords   varchar(255)                           null comment '商品关键字',
+    spu              varchar(70)                            null comment 'spu码',
+    sku              varchar(70)                            null comment 'sku码',
+    effect           varchar(1000)                          null comment '功效',
+    traits           varchar(1000)                          null comment '性状',
+    support_o2o      tinyint                                null comment '是否支持O2O',
+    support_b2c      tinyint                                null comment '是否支持B2C',
+    support_user     tinyint                                null comment '是否支持自提',
+    search_tag       tinyint                                null comment '搜索标记',
+    constraint idx_good_code
+        unique (goods_code) comment '货号索引'
+)
+    comment '商品信息表';
+
+create index idx_status
+    on goods_infos (status)
+    comment '状态索引';
 

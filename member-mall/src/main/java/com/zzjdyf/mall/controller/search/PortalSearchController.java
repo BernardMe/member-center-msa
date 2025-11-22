@@ -1,12 +1,11 @@
 package com.zzjdyf.mall.controller.search;
 
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.zzjdyf.common.annotation.PageInfoParam;
-import com.zzjdyf.common.component.page.PageCondition;
+import com.cheshun.common.annotation.PageInfoParam;
+import com.cheshun.common.component.page.PageCondition;
 import com.zzjdyf.mall.service.SearchEsSkuService;
 import com.zzjdyf.mall.service.SearchPreService;
 import com.zzjdyf.mall.vo.dto.*;
-import com.zzjdyf.common.result.Result;
+import com.cheshun.common.result.Result;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

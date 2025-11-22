@@ -1,8 +1,8 @@
 package com.zzjdyf.mall.controller.admin;
 
-import com.zzjdyf.common.annotation.PageInfoParam;
-import com.zzjdyf.common.component.page.PageCondition;
-import com.zzjdyf.common.result.Result;
+import com.cheshun.common.annotation.PageInfoParam;
+import com.cheshun.common.component.page.PageCondition;
+import com.cheshun.common.result.Result;
 import com.zzjdyf.mall.service.admin.AdminHotSearchService;
 import com.zzjdyf.mall.vo.dto.ESHotSearchVO;
 import io.swagger.annotations.Api;

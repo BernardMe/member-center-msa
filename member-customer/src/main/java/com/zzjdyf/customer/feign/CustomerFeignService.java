@@ -1,6 +1,6 @@
 package com.zzjdyf.customer.feign;
 
-import com.zzjdyf.common.tools.utils.R;
+import com.cheshun.common.tools.utils.R;
 import com.zzjdyf.customer.feign.fallback.CustomerFallbackService;
 import com.zzjdyf.customer.vo.CustomerBean;
 import org.springframework.cloud.openfeign.FeignClient;

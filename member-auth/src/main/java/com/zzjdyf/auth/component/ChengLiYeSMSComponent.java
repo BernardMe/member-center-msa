@@ -3,7 +3,7 @@ package com.zzjdyf.auth.component;
 import com.zzjdyf.auth.feign.sms.chengliye.ChengLiYeBroker;
 import com.zzjdyf.auth.feign.sms.chengliye.request.ChengLiYeGetRequest;
 import com.zzjdyf.auth.feign.sms.chengliye.response.ChengLiYeGetResponse;
-import com.zzjdyf.common.tools.utils.Md5Util;
+import com.cheshun.common.tools.utils.Md5Util;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

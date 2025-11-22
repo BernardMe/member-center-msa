@@ -1,9 +1,9 @@
 package com.zzjdyf.mall.interceptor;
 
 import com.zzjdyf.mall.tools.util.JwtUtil;
-import com.zzjdyf.common.constant.JwtClaimsConstant;
-import com.zzjdyf.common.context.BaseContext;
-import com.zzjdyf.common.properties.JwtProperties;
+import com.cheshun.common.constant.JwtClaimsConstant;
+import com.cheshun.common.context.BaseContext;
+import com.cheshun.common.properties.JwtProperties;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

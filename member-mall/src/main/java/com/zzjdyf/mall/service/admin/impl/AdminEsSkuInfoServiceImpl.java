@@ -2,10 +2,10 @@ package com.zzjdyf.mall.service.admin.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zzjdyf.common.api.web.http.common.ListResult;
-import com.zzjdyf.common.component.page.PageCondition;
-import com.zzjdyf.common.result.Result;
-import com.zzjdyf.common.tools.utils.ResultUtil;
+import com.cheshun.common.api.web.http.common.ListResult;
+import com.cheshun.common.component.page.PageCondition;
+import com.cheshun.common.result.Result;
+import com.cheshun.common.tools.utils.ResultUtil;
 import com.zzjdyf.mall.constant.CommontBooleanStatusType;
 import com.zzjdyf.mall.constant.OperationType;
 import com.zzjdyf.mall.domain.dao.EsGoodsSkuRepository;
@@ -34,9 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.zzjdyf.common.constant.CommonServiceConstant.SU;
-import static com.zzjdyf.common.result.Result.ERR_CODE;
-import static com.zzjdyf.common.tools.utils.DateTimeUtil.USUAL_DATE_TIME_FORMAT_VALUE;
+import static com.cheshun.common.constant.CommonServiceConstant.SU;
+import static com.cheshun.common.result.Result.ERR_CODE;
+import static com.cheshun.common.tools.utils.DateTimeUtil.USUAL_DATE_TIME_FORMAT_VALUE;
 
 @Slf4j
 @Service

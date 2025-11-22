@@ -1,6 +1,6 @@
 package com.zzjdyf.mall.service.member.core.oms.api;
 
-import com.zzjdyf.common.constant.HttpMethod;
+import com.cheshun.common.constant.HttpMethod;
 
 import java.util.Objects;
 

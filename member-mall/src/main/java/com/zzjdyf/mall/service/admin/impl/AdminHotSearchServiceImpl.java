@@ -2,10 +2,10 @@ package com.zzjdyf.mall.service.admin.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zzjdyf.common.api.web.http.common.ListResult;
-import com.zzjdyf.common.component.page.PageCondition;
-import com.zzjdyf.common.result.Result;
-import com.zzjdyf.common.tools.utils.ResultUtil;
+import com.cheshun.common.api.web.http.common.ListResult;
+import com.cheshun.common.component.page.PageCondition;
+import com.cheshun.common.result.Result;
+import com.cheshun.common.tools.utils.ResultUtil;
 import com.zzjdyf.mall.domain.entity.EsHotSearch;
 import com.zzjdyf.mall.domain.dao.HotSearchRepository;
 import com.zzjdyf.mall.service.admin.AdminHotSearchService;
@@ -27,8 +27,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.zzjdyf.common.constant.CommonServiceConstant.SU;
-import static com.zzjdyf.common.result.Result.ERR_CODE;
+import static com.cheshun.common.constant.CommonServiceConstant.SU;
+import static com.cheshun.common.result.Result.ERR_CODE;
 
 /**
  * 计算热搜词及热度Service

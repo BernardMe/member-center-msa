@@ -1,7 +1,7 @@
 package com.zzjdyf.mall.strategy;
 
 import com.zzjdyf.mall.service.SkuService;
-import com.zzjdyf.common.exception.RRException;
+import com.cheshun.common.exception.RRException;
 import com.google.common.collect.Lists;
 import org.apache.commons.math3.util.Pair;
 import org.slf4j.Logger;

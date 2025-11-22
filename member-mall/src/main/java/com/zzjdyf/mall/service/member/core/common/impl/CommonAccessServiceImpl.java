@@ -1,10 +1,10 @@
 package com.zzjdyf.mall.service.member.core.common.impl;
 
 import com.zzjdyf.mall.service.member.core.common.CommonAccessService;
-import com.zzjdyf.common.api.web.http.common.EntityResult;
-import com.zzjdyf.common.constant.CommonServiceConstant;
-import com.zzjdyf.common.constant.user.MemberHttpHeader;
-import com.zzjdyf.common.tools.utils.ResultUtil;
+import com.cheshun.common.api.web.http.common.EntityResult;
+import com.cheshun.common.constant.CommonServiceConstant;
+import com.cheshun.common.constant.user.MemberHttpHeader;
+import com.cheshun.common.tools.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;

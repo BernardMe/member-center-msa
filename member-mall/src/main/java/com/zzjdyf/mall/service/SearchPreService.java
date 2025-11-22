@@ -1,10 +1,9 @@
 package com.zzjdyf.mall.service;
 
-import com.zzjdyf.common.component.page.PageCondition;
+import com.cheshun.common.component.page.PageCondition;
 import com.zzjdyf.mall.vo.dto.*;
-import com.zzjdyf.common.result.Result;
+import com.cheshun.common.result.Result;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface SearchPreService {

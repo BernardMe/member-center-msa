@@ -2,7 +2,7 @@ package com.zzjdyf.auth.service.member.core.base;
 
 
 import com.zzjdyf.auth.vo.dto.MemberLoginInfo;
-import com.zzjdyf.common.api.web.http.common.EntityResult;
+import com.cheshun.common.api.web.http.common.EntityResult;
 
 /**
  * 用户基础信息服务

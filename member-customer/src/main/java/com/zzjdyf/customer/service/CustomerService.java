@@ -1,6 +1,6 @@
 package com.zzjdyf.customer.service;
 
-import com.zzjdyf.common.tools.utils.R;
+import com.cheshun.common.tools.utils.R;
 import com.zzjdyf.customer.vo.CustomerBean;
 
 /**

@@ -1,7 +1,7 @@
 package com.zzjdyf.auth.service.user.login;
 
 import com.zzjdyf.auth.vo.dto.*;
-import com.zzjdyf.common.result.Result;
+import com.cheshun.common.result.Result;
 
 import javax.servlet.http.HttpServletRequest;
 

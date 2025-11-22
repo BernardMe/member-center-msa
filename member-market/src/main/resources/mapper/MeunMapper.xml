@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zzjdyf.market.domain.mapper.MeunMapper">
+<mapper namespace="com.cheshun.market.domain.mapper.MeunMapper">
 
-    <resultMap id="MeunResult" type="com.zzjdyf.market.domain.entity.ClsMarketEtcMeun">
+    <resultMap id="MeunResult" type="com.cheshun.market.domain.entity.ClsMarketEtcMeun">
         <id property="id" column="id" />
         <result property="sort" column="sort" />
         <result property="name" column="name" />
@@ -11,7 +11,7 @@
         <result property="parentId" column="parent_id" />
         <result property="leaf" column="leaf" />
         <collection property="meunList" column="{parentId=id,roleId=role_id}"
-                    select="getByParentId" ofType="com.zzjdyf.market.domain.entity.ClsMarketEtcMeun" javaType="java.util.List">
+                    select="getByParentId" ofType="com.cheshun.market.domain.entity.ClsMarketEtcMeun" javaType="java.util.List">
         </collection>
     </resultMap>
 

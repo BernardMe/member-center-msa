@@ -1,7 +1,7 @@
 package com.zzjdyf.customer.feign.fallback;
 
-import com.zzjdyf.common.exception.BizCodeEnum;
-import com.zzjdyf.common.tools.utils.R;
+import com.cheshun.common.exception.BizCodeEnum;
+import com.cheshun.common.tools.utils.R;
 import com.zzjdyf.customer.feign.CustomerFeignService;
 import com.zzjdyf.customer.vo.CustomerBean;
 

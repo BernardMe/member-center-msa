@@ -1,8 +1,8 @@
 package com.zzjdyf.auth.controller;
 
 import com.zzjdyf.auth.strategy.AuthVerifyStrategy;
-import com.zzjdyf.common.result.Result;
-import com.zzjdyf.common.tools.utils.ResultUtil;
+import com.cheshun.common.result.Result;
+import com.cheshun.common.tools.utils.ResultUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

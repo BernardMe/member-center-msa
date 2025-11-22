@@ -1,7 +1,7 @@
 package com.zzjdyf.auth.service.member.core.oms;
 
 import com.zzjdyf.auth.service.member.core.oms.entity.OmsUserInfoVO;
-import com.zzjdyf.common.api.web.http.common.EntityResult;
+import com.cheshun.common.api.web.http.common.EntityResult;
 
 public interface OmsUserInfoService {
 	/**

@@ -1,8 +1,8 @@
 package com.zzjdyf.auth.config;
 
 import com.zzjdyf.auth.interceptor.JwtTokenUserInterceptor;
-import com.zzjdyf.common.json.JacksonObjectMapper;
-import com.zzjdyf.common.tools.utils.SpringBootUtil;
+import com.cheshun.common.json.JacksonObjectMapper;
+import com.cheshun.common.tools.utils.SpringBootUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

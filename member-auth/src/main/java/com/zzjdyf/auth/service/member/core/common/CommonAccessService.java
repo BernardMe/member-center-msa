@@ -1,7 +1,7 @@
 package com.zzjdyf.auth.service.member.core.common;
 
 
-import com.zzjdyf.common.api.web.http.common.EntityResult;
+import com.cheshun.common.api.web.http.common.EntityResult;
 
 /**
  * 用户会话存储服务.

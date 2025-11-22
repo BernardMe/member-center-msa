@@ -2,7 +2,7 @@ package com.zzjdyf.gateway.common;
 
 
 
-import com.zzjdyf.common.exception.RRException;
+import com.cheshun.common.exception.RRException;
 import org.springframework.cloud.gateway.support.NotFoundException;
 import org.springframework.web.server.ResponseStatusException;
 

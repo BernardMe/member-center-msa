@@ -1,7 +1,7 @@
 package com.zzjdyf.mall.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zzjdyf.common.constant.JsonConstant;
+import com.cheshun.common.constant.JsonConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

@@ -4,14 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zzjdyf.common.api.web.http.common.ListResult;
-import com.zzjdyf.common.component.page.PageCondition;
-import com.zzjdyf.common.tools.utils.ResultUtil;
+import com.cheshun.common.api.web.http.common.ListResult;
+import com.cheshun.common.component.page.PageCondition;
+import com.cheshun.common.tools.utils.ResultUtil;
 import com.zzjdyf.mall.domain.entity.EsHotSearch;
 import com.zzjdyf.mall.service.SearchPreService;
 import com.zzjdyf.mall.vo.dto.*;
-import com.zzjdyf.common.properties.WeChatProperties;
-import com.zzjdyf.common.result.Result;
+import com.cheshun.common.properties.WeChatProperties;
+import com.cheshun.common.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -30,8 +30,8 @@ import org.springframework.stereotype.Service;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import static com.zzjdyf.common.constant.CommonServiceConstant.SU;
-import static com.zzjdyf.common.result.Result.ERR_CODE;
+import static com.cheshun.common.constant.CommonServiceConstant.SU;
+import static com.cheshun.common.result.Result.ERR_CODE;
 
 @Service
 @Slf4j

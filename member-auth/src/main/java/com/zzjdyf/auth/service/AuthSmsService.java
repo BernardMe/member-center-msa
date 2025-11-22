@@ -1,6 +1,6 @@
 package com.zzjdyf.auth.service;
 
-import com.zzjdyf.common.result.Result;
+import com.cheshun.common.result.Result;
 
 import java.util.Map;
 

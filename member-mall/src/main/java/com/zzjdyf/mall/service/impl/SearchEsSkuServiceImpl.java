@@ -3,8 +3,8 @@ package com.zzjdyf.mall.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.github.pagehelper.PageInfo;
-import com.zzjdyf.common.result.Result;
-import com.zzjdyf.common.tools.utils.ResultUtil;
+import com.cheshun.common.result.Result;
+import com.cheshun.common.tools.utils.ResultUtil;
 import com.zzjdyf.mall.domain.entity.EsSkuInfo;
 import com.zzjdyf.mall.service.SearchEsSkuService;
 import com.zzjdyf.mall.vo.dto.EsSkuInfoPO;
@@ -32,9 +32,9 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import static com.zzjdyf.common.result.Result.ERR_CODE;
-import static com.zzjdyf.common.result.Result.SUCC_CODE;
-import static com.zzjdyf.common.tools.utils.DateTimeUtil.USUAL_DATE_TIME_FORMAT_VALUE;
+import static com.cheshun.common.result.Result.ERR_CODE;
+import static com.cheshun.common.result.Result.SUCC_CODE;
+import static com.cheshun.common.tools.utils.DateTimeUtil.USUAL_DATE_TIME_FORMAT_VALUE;
 
 /**
  * 会员端-首页搜索框Service实现类

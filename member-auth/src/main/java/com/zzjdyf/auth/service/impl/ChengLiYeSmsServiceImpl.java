@@ -7,9 +7,9 @@ import com.zzjdyf.auth.feign.sms.chengliye.response.ChengLiYeGetResponse;
 import com.zzjdyf.auth.service.AuthSmsService;
 import com.zzjdyf.auth.service.SmsUnionLogService;
 import com.zzjdyf.auth.vo.SmsRecordVo;
-import com.zzjdyf.common.exception.RRException;
-import com.zzjdyf.common.result.Result;
-import com.zzjdyf.common.tools.utils.ResultUtil;
+import com.cheshun.common.exception.RRException;
+import com.cheshun.common.result.Result;
+import com.cheshun.common.tools.utils.ResultUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.zzjdyf.common.result.Result.ERR_CODE;
+import static com.cheshun.common.result.Result.ERR_CODE;
 
 /**
  * 成立业sms服务

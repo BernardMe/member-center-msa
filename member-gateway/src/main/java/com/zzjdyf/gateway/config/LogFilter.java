@@ -1,7 +1,7 @@
 package com.zzjdyf.gateway.config;
 
 import cn.hutool.core.util.IdUtil;
-import com.zzjdyf.common.Const;
+import com.cheshun.common.Const;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;

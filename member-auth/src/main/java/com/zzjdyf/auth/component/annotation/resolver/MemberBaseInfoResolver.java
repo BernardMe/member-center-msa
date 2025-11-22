@@ -2,10 +2,10 @@ package com.zzjdyf.auth.component.annotation.resolver;
 
 import com.zzjdyf.auth.service.member.core.base.MemberBaseInfoService;
 import com.zzjdyf.auth.vo.dto.MemberLoginInfo;
-import com.zzjdyf.common.annotation.MemberBaseParam;
-import com.zzjdyf.common.api.web.http.common.EntityResult;
-import com.zzjdyf.common.constant.user.MemberHttpHeader;
-import com.zzjdyf.common.exception.MemberUnloginException;
+import com.cheshun.common.annotation.MemberBaseParam;
+import com.cheshun.common.api.web.http.common.EntityResult;
+import com.cheshun.common.constant.user.MemberHttpHeader;
+import com.cheshun.common.exception.MemberUnloginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

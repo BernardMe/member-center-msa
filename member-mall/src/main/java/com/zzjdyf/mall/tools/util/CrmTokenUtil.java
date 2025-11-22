@@ -1,8 +1,8 @@
 package com.zzjdyf.mall.tools.util;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zzjdyf.common.crminterface.AccessTokenRelated;
-import com.zzjdyf.common.properties.CrmProperties;
+import com.cheshun.common.crminterface.AccessTokenRelated;
+import com.cheshun.common.properties.CrmProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
