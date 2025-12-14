@@ -108,7 +108,7 @@ proxy:
   host: 172.27.50.53
   port: 8088
 
-zzjdyf:
+cheshun:
   jwt:
     # 设置jwt签名加密时使用的秘钥
     admin-secret-key: zzjadmin

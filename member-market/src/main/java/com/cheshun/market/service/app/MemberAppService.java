@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.cheshun.market.domain.entity.enums.AgentRole.*;
+
 @Slf4j
 @Service
 @AllArgsConstructor
@@ -49,19 +51,19 @@ public class MemberAppService {
         }
         LambdaQueryWrapper<ClsMarketEtcAgent> queryWrapper = new LambdaQueryWrapper<>();
         switch (agent.getRole()) {
-            case AgentRole.STAFF:
+            case STAFF:
                 // 当前代理商是员工
                 queryWrapper.eq(ClsMarketEtcAgent::getStaffId, agent.getId());
                 break;
-            case AgentRole.AGENT_LEVEL_1:
+            case AGENT_LEVEL_1:
                 // 当前代理商是一级代理商
                 queryWrapper.eq(ClsMarketEtcAgent::getAgent1Id, agent.getId());
                 break;
-            case AgentRole.AGENT_LEVEL_2:
+            case AGENT_LEVEL_2:
                 // 当前代理商是二级代理商
                 queryWrapper.eq(ClsMarketEtcAgent::getAgent2Id, agent.getId());
                 break;
-            case AgentRole.AGENT_LEVEL_3:
+            case AGENT_LEVEL_3:
                 // 当前代理商是三级代理商,返回空列表
                 return new Page<>();
         }

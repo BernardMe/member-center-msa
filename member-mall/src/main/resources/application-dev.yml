@@ -114,7 +114,7 @@ proxy:
   host: 172.27.50.53
   port: 8088
 
-zzjdyf:
+cheshun:
   jwt:
     # 设置jwt签名加密时使用的秘钥
     admin-secret-key: zzjadmin
@@ -149,7 +149,7 @@ zzjdyf:
     chengliye:
       url: https://www.sms-cly.cn/v7/msg/submit.json
       userid: 'clycls'
-      pwd: 'ptg5mq'
+      pwd: 'mq'
       testContent: 同事您好，感谢您对此次测试的配合。123456，此短信为CHENG_LI_YE测试使用，禁止商用。
   wechat:
     appid: wxb363a03fd14cfxxx  # 生产  wxb363a03fd14cf339

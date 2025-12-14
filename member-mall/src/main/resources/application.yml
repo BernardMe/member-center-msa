@@ -6,3 +6,37 @@ spring:
       enabled: false
 
 
+
+custom:
+  redis:
+    db6: 6
+    db7: 7
+    db8: 8
+  banner:
+    location: banner.txt
+  servlet:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+mybatis-plus:
+  mapper-locations: classpath*:mappers/**/*Mapper.xml
+  type-aliases-package: com.cheshun.mall.domain.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    auto-mapping-behavior: full
+    call-setters-on-nulls: true
+logging:
+  level:
+    com:
+      cheshun:
+        mapper: debug
+        service: info
+        controller: info
+knife4j:
+  enable: true  # 开启 Knife4j（默认 true，可不写）
+  production: false  # 是否生产环境（true 会禁用文档 ）

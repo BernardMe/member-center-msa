@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zzjdyf.mall.domain.mapper.GoodsInfosMapper">
+<mapper namespace="com.cheshun.mall.domain.mapper.GoodsInfosMapper">
 
-    <resultMap id="BaseResultMap" type="com.zzjdyf.mall.domain.entity.GoodsInfos">
+    <resultMap id="BaseResultMap" type="com.cheshun.mall.domain.entity.GoodsInfos">
         <id property="goodsId" column="goods_id" jdbcType="INTEGER"/>
         <result property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
         <result property="productName" column="product_name" jdbcType="VARCHAR"/>
@@ -42,7 +42,7 @@
         modifytime,goods_keywords,spu,sku,retail_price
     </sql>
 
-    <select id="selectImportGoodsForSku" resultType= "com.zzjdyf.mall.domain.entity.GoodsInfos" >
+    <select id="selectImportGoodsForSku" resultType= "com.cheshun.mall.domain.entity.GoodsInfos" >
         SELECT gi.goods_id goodsId,
                gi.goods_code goodsCode,
                gi.product_name productName,

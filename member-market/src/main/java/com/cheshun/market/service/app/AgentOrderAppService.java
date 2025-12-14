@@ -8,9 +8,6 @@ import com.cheshun.market.domain.entity.*;
 import com.cheshun.market.domain.entity.enums.*;
 import com.cheshun.market.service.DtoService;
 import com.cheshun.common.exception.RRException;
-import com.zzjdyf.market.domain.dao.*;
-import com.zzjdyf.market.domain.entity.*;
-import com.zzjdyf.market.domain.entity.enums.*;
 import com.cheshun.market.vo.command.AddOrderCommand;
 import com.cheshun.market.vo.command.AddRepleshOrderCommand;
 import com.cheshun.market.vo.command.AddRepleshUpOrderCommand;
@@ -43,6 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
+
+import static com.cheshun.market.domain.entity.enums.TradeType.*;
 
 /**
  * @author wangzhuo
@@ -120,7 +119,7 @@ public class AgentOrderAppService {
             LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper1 = new LambdaQueryWrapper<>();
             queryWrapper1.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
             // 订单类型为"订货"
-            queryWrapper1.eq(ClsMarketEtcAgentOrder::getType, TradeType.ORDER);
+            queryWrapper1.eq(ClsMarketEtcAgentOrder::getType, ORDER);
             int orderCount = agentOrderDao.getMapper().selectCount(queryWrapper1);
             // 每一个代理商品有且仅有一条"订货"订单数据
             // "订货"订单是"补货"订单的前置订单,如果"订货"订单不存在,"补货"订单不可能存在
@@ -152,7 +151,7 @@ public class AgentOrderAppService {
         // 创建该代理商品的订货订单
         ClsMarketEtcAgentOrder agentOrder = new ClsMarketEtcAgentOrder();
 
-        agentOrder.setType(TradeType.ORDER);
+        agentOrder.setType(ORDER);
         agentOrder.setAgentGoodsId(agentGoods.getId());
         agentOrder.setAgentId(agent.getId());
         agentOrder.setGoodsId(goods.getId());
@@ -215,7 +214,7 @@ public class AgentOrderAppService {
         Optional.ofNullable(agent.getId())
                 .ifPresent(t -> boolQueryBuilder.must(QueryBuilders.matchPhraseQuery("agentId", t)));
         // 查询条件-订单类型(订货/补货)
-        Optional.ofNullable(query.getType()).filter(t -> t == TradeType.ORDER || t == TradeType.REPLENISH || t == TradeType.WITHDRAW)
+        Optional.ofNullable(query.getType()).filter(t -> t == ORDER || t == REPLENISH || t == WITHDRAW)
                 .ifPresent(t -> boolQueryBuilder.must(QueryBuilders.termQuery("type", t.getValue())));
         // 查询条件-交易时间
         if (query.getStartTime() != null && query.getEndTime() != null) {
@@ -234,8 +233,8 @@ public class AgentOrderAppService {
             //这里便利ES里面的交易记录
             for (ClsMarketEtcEsTrade trade : content) {
                 //这里判断当前交易是一个订货/补货订单
-                if (TradeType.ORDER.equals(trade.getType()) || TradeType.REPLENISH.equals(trade.getType())
-                        || TradeType.REPLENISH_UP.equals(trade.getType()) || TradeType.RETURN.equals(trade.getType())) {
+                if (ORDER.equals(trade.getType()) || REPLENISH.equals(trade.getType())
+                        || REPLENISH_UP.equals(trade.getType()) || RETURN.equals(trade.getType())) {
                     ClsMarketEtcAgentOrder agentOrder = agentOrderDao.findOne(trade.getTradeId());
                     if (agentOrder == null) {
                         continue;
@@ -249,19 +248,19 @@ public class AgentOrderAppService {
                     orderAppDto.setTypeName(orderAppDto.getType().getDescribe());
                     orderAppDto.setStatusStr(agentOrder.getStatus().getDescribe());
                     switch (agentOrder.getType()) {
-                        case TradeType.ORDER:
+                        case ORDER:
                             // 订货订单
                             orderAppDto.setAmount(agentGoods.getPaidDeposit());
                             break;
-                        case TradeType.REPLENISH:
+                        case REPLENISH:
                             // 补货订单
                             orderAppDto.setAmount(BigDecimal.ZERO);
                             break;
-                        case TradeType.REPLENISH_UP:
+                        case REPLENISH_UP:
                             // 提标补货订单
                             orderAppDto.setAmount(BigDecimal.ZERO);
                             break;
-                        case TradeType.RETURN:
+                        case RETURN:
                             // 退货订单
                             orderAppDto.setAmount(BigDecimal.ZERO);
                             break;
@@ -269,13 +268,13 @@ public class AgentOrderAppService {
                     list.add(orderAppDto);
                 }
                 //这里判断当前交易是一个提现订单
-                if (TradeType.WITHDRAW.equals(trade.getType())) {
+                if (WITHDRAW.equals(trade.getType())) {
                     ClsMarketEtcAgentWithdrawOrder agentWithdrawOrder = agentWithdrawOrderDao.findOne(trade.getTradeId());
                     if (agentWithdrawOrder == null) {
                         continue;
                     }
                     OrderAppDto orderAppDto = DtoService.INSTANCE.toAppDto(agentWithdrawOrder);
-                    orderAppDto.setType(TradeType.WITHDRAW);
+                    orderAppDto.setType(WITHDRAW);
                     orderAppDto.setTypeName(orderAppDto.getType().getDescribe());
                     orderAppDto.setStatusStr(agentWithdrawOrder.getStatus().getDescribe());
                     orderAppDto.setAmount(agentWithdrawOrder.getBrokerAmount());
@@ -474,7 +473,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在"订货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(ClsMarketEtcAgentOrder::getType, TradeType.ORDER);
+        queryWrapper.eq(ClsMarketEtcAgentOrder::getType, ORDER);
         queryWrapper.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.SHIPPED);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper)).orElse(0) == 0) {
@@ -482,7 +481,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待发货的"补货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper2 = new LambdaQueryWrapper<>();
-        queryWrapper2.eq(ClsMarketEtcAgentOrder::getType, TradeType.REPLENISH);
+        queryWrapper2.eq(ClsMarketEtcAgentOrder::getType, REPLENISH);
         queryWrapper2.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper2.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_REPLENISH);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper2)).orElse(0) > 0) {
@@ -490,7 +489,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待发货的"提标补货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper3 = new LambdaQueryWrapper<>();
-        queryWrapper3.eq(ClsMarketEtcAgentOrder::getType, TradeType.REPLENISH_UP);
+        queryWrapper3.eq(ClsMarketEtcAgentOrder::getType, REPLENISH_UP);
         queryWrapper3.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper3.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_REPLENISH);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper3)).orElse(0) > 0) {
@@ -498,7 +497,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待审核的"退货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper4 = new LambdaQueryWrapper<>();
-        queryWrapper4.eq(ClsMarketEtcAgentOrder::getType, TradeType.RETURN);
+        queryWrapper4.eq(ClsMarketEtcAgentOrder::getType, RETURN);
         queryWrapper4.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper4.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_RETURN);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper4)).orElse(0) > 0) {
@@ -543,7 +542,7 @@ public class AgentOrderAppService {
         }
         // 创建补货订单
         ClsMarketEtcAgentOrder order = new ClsMarketEtcAgentOrder();
-        order.setType(TradeType.REPLENISH);
+        order.setType(REPLENISH);
         order.setAgentGoodsId(agentGoods.getId());
         order.setAgentId(agent.getId());
         order.setGoodsId(goods.getId());
@@ -621,7 +620,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在"订货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(ClsMarketEtcAgentOrder::getType, TradeType.ORDER);
+        queryWrapper.eq(ClsMarketEtcAgentOrder::getType, ORDER);
         queryWrapper.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.SHIPPED);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper)).orElse(0) == 0) {
@@ -629,7 +628,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待发货的"补货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper2 = new LambdaQueryWrapper<>();
-        queryWrapper2.eq(ClsMarketEtcAgentOrder::getType, TradeType.REPLENISH);
+        queryWrapper2.eq(ClsMarketEtcAgentOrder::getType, REPLENISH);
         queryWrapper2.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper2.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_REPLENISH);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper2)).orElse(0) > 0) {
@@ -637,7 +636,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待发货的"提标补货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper3 = new LambdaQueryWrapper<>();
-        queryWrapper3.eq(ClsMarketEtcAgentOrder::getType, TradeType.REPLENISH_UP);
+        queryWrapper3.eq(ClsMarketEtcAgentOrder::getType, REPLENISH_UP);
         queryWrapper3.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper3.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_REPLENISH);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper3)).orElse(0) > 0) {
@@ -645,7 +644,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待审核的"退货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper4 = new LambdaQueryWrapper<>();
-        queryWrapper4.eq(ClsMarketEtcAgentOrder::getType, TradeType.RETURN);
+        queryWrapper4.eq(ClsMarketEtcAgentOrder::getType, RETURN);
         queryWrapper4.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper4.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_RETURN);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper4)).orElse(0) > 0) {
@@ -676,7 +675,7 @@ public class AgentOrderAppService {
             try {
                 // 创建申请提标补货订单
                 order = new ClsMarketEtcAgentOrder();
-                order.setType(TradeType.REPLENISH_UP);
+                order.setType(REPLENISH_UP);
                 order.setAgentGoodsId(agentGoods.getId());
                 order.setAgentId(agent.getId());
                 order.setGoodsId(goods.getId());
@@ -779,7 +778,7 @@ public class AgentOrderAppService {
         // 校验退还设备订单待处理(待发货，申请补货，)防止重复提交
         // 校验该代理商品是否存在"订货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(ClsMarketEtcAgentOrder::getType, TradeType.ORDER);
+        queryWrapper.eq(ClsMarketEtcAgentOrder::getType, ORDER);
         queryWrapper.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.SHIPPED);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper)).orElse(0) == 0) {
@@ -787,7 +786,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待发货的"补货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper2 = new LambdaQueryWrapper<>();
-        queryWrapper2.eq(ClsMarketEtcAgentOrder::getType, TradeType.REPLENISH);
+        queryWrapper2.eq(ClsMarketEtcAgentOrder::getType, REPLENISH);
         queryWrapper2.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper2.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_REPLENISH);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper2)).orElse(0) > 0) {
@@ -795,7 +794,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待发货的"提标补货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper3 = new LambdaQueryWrapper<>();
-        queryWrapper3.eq(ClsMarketEtcAgentOrder::getType, TradeType.REPLENISH_UP);
+        queryWrapper3.eq(ClsMarketEtcAgentOrder::getType, REPLENISH_UP);
         queryWrapper3.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper3.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_REPLENISH);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper3)).orElse(0) > 0) {
@@ -803,7 +802,7 @@ public class AgentOrderAppService {
         }
         // 校验该代理商品是否存在待审核的"申请退货"订单
         LambdaQueryWrapper<ClsMarketEtcAgentOrder> queryWrapper4 = new LambdaQueryWrapper<>();
-        queryWrapper4.eq(ClsMarketEtcAgentOrder::getType, TradeType.RETURN);
+        queryWrapper4.eq(ClsMarketEtcAgentOrder::getType, RETURN);
         queryWrapper4.eq(ClsMarketEtcAgentOrder::getAgentGoodsId, agentGoods.getId());
         queryWrapper4.eq(ClsMarketEtcAgentOrder::getStatus, OrderStatus.APPLY_RETURN);
         if (Optional.ofNullable(agentOrderDao.getMapper().selectCount(queryWrapper4)).orElse(0) > 0) {
@@ -861,7 +860,7 @@ public class AgentOrderAppService {
             try {
                 // 创建申请退货订单
                 order = new ClsMarketEtcAgentOrder();
-                order.setType(TradeType.RETURN);
+                order.setType(RETURN);
                 order.setAgentGoodsId(agentGoods.getId());
                 order.setAgentId(agent.getId());
                 order.setGoodsId(goods.getId());

@@ -30,7 +30,7 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1
       logic-not-delete-value: 0
-  type-enums-package: com.zzjdyf.market.domain.entity.enums
+  type-enums-package: com.cheshun.market.domain.entity.enums
   mapper-locations: classpath*:/mapper/*.xml
 
 global:

@@ -8,6 +8,7 @@
         <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <groupId>com.cheshun</groupId>
     <artifactId>member-market</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>member-market</name>
@@ -15,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.zzjdyf</groupId>
+            <groupId>com.cheshun</groupId>
             <artifactId>member-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

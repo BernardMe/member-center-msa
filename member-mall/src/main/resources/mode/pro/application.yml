@@ -79,7 +79,7 @@ mybatis-plus:
       id-type: auto
       logic-delete-value: 1
       logic-not-delete-value: 0
-  type-enums-package: com.zzjdyf.*.entity
+  type-enums-package: com.cheshun.*.entity
   mapper-locations: classpath*:/mapper/*.xml
 
 management:

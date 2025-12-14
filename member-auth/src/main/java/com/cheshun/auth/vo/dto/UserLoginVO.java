@@ -1,0 +1,40 @@
+package com.cheshun.auth.vo.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserLoginVO implements Serializable {
+
+
+    private String openid;
+
+    private String unionId;
+
+    private String accessToken;
+
+    private String memberCardNo;
+
+    private String memberName;
+
+    private String phoneNumber;
+
+    private String headImg;
+
+    private String gender;
+
+    private String birthday;
+
+    private String refreshToken;
+
+    private Long expireTimestamp;
+
+
+}

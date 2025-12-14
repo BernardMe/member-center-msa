@@ -3,8 +3,6 @@ package com.cheshun.market.service.admin;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cheshun.market.domain.dao.*;
 import com.cheshun.market.domain.entity.*;
-import com.zzjdyf.market.domain.dao.*;
-import com.zzjdyf.market.domain.entity.*;
 import com.cheshun.market.service.common.JwtService;
 import com.cheshun.market.vo.command.MeunMoCommand;
 import com.cheshun.market.vo.command.UpdateMeunMoCommand;

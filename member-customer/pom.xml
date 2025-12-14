@@ -8,7 +8,7 @@
         <version>2.2.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.zzjdyf</groupId>
+    <groupId>com.cheshun</groupId>
     <artifactId>member-customer</artifactId>
     <name>member-customer</name>
     <description>客户中心</description>

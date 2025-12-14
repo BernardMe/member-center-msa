@@ -19,6 +19,8 @@ import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
+import static com.cheshun.market.domain.entity.enums.AgentRole.*;
+
 /**
  * @author wangzhuo
  * Created on 20210725
@@ -78,28 +80,28 @@ public class AgentAppService {
         agent.setIdNo(command.getIdCard());
         // 设置角色
         switch (inviter.getRole()) {
-            case AgentRole.STAFF:
+            case STAFF:
                 // 邀请人是【员工】
                 agent.setStaffId(inviter.getId());
                 // 角色设置为【一级代理商】
-                agent.setRole(AgentRole.AGENT_LEVEL_1);
+                agent.setRole(AGENT_LEVEL_1);
                 break;
-            case AgentRole.AGENT_LEVEL_1:
+            case AGENT_LEVEL_1:
                 // 邀请人是【一级代理商】
                 agent.setStaffId(inviter.getStaffId());
                 agent.setAgent1Id(inviter.getId());
                 // 角色设置为【二级代理商】
-                agent.setRole(AgentRole.AGENT_LEVEL_2);
+                agent.setRole(AGENT_LEVEL_2);
                 break;
-            case AgentRole.AGENT_LEVEL_2:
+            case AGENT_LEVEL_2:
                 // 邀请人是【二级代理商】
                 agent.setStaffId(inviter.getStaffId());
                 agent.setAgent1Id(inviter.getAgent1Id());
                 agent.setAgent2Id(inviter.getId());
                 // 角色设置为【三级代理商】
-                agent.setRole(AgentRole.AGENT_LEVEL_3);
+                agent.setRole(AGENT_LEVEL_3);
                 break;
-            case AgentRole.AGENT_LEVEL_3:
+            case AGENT_LEVEL_3:
                 throw new RRException("您的邀请人无邀请权限");
         }
         // 默认为待审核
@@ -144,7 +146,7 @@ public class AgentAppService {
         dto.setTotalBonus(entity.getTotalActiveBonus().add(entity.getTotalFirstConsumeBonus()));
         dto.setBalance(entity.getTotalActiveBonus().add(entity.getTotalFirstConsumeBonus()).subtract(entity.getTotalWithdrawAmount()));
         // 只有一级代理商可提现
-        dto.setCanWithdraw(entity.getRole() == AgentRole.AGENT_LEVEL_1);
+        dto.setCanWithdraw(entity.getRole() == AGENT_LEVEL_1);
         return dto;
     }
 }

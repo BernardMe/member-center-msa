@@ -3,12 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.cheshun</groupId>
+        <artifactId>member-center-msa</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.zzjdyf</groupId>
     <artifactId>member-mall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>member-mall</name>
@@ -75,7 +73,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.zzjdyf</groupId>
+            <groupId>com.cheshun</groupId>
             <artifactId>member-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <!--<exclusions>
@@ -108,6 +106,12 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>3.3.2</version>
         </dependency>
         <!--<dependency>
             <groupId>com.alibaba</groupId>
@@ -197,6 +201,12 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.cheshun</groupId>
+            <artifactId>member-pojo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

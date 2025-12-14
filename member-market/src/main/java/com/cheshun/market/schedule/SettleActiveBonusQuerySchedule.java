@@ -14,7 +14,6 @@ import com.cheshun.common.exception.RRException;
 import com.cheshun.market.config.ScheduleCronConfig;
 import com.cheshun.market.domain.dao.AgentDao;
 import com.cheshun.market.domain.dao.AgentOrderGoodsDao;
-import com.zzjdyf.market.domain.entity.enums.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;

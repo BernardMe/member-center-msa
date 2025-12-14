@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.cheshun.market.domain.entity.enums.AgentRole.*;
+
 /**
  * @author 阿隆
  * Created on 2021/7/29 9:07 下午.
@@ -43,7 +45,7 @@ public class PromoteAppService {
                 .orElseThrow(() -> new RRException("您不是代理商"));
         LambdaQueryWrapper<ClsMarketEtcAgentPromoteHistory> queryWrapper = new LambdaQueryWrapper<>();
         switch (agent.getRole()) {
-            case AgentRole.STAFF:
+            case STAFF:
                 // 是员工
                 if (query.getType() == PromotePageQuery.QueryType.CONSUMED) {
                     // 员工在平台上没有首次消费分润信息
@@ -53,7 +55,7 @@ public class PromoteAppService {
                 // 查询已激活分佣奖励
                 queryWrapper.gt(ClsMarketEtcAgentPromoteHistory::getStaffBonus, 0);
                 break;
-            case AgentRole.AGENT_LEVEL_1:
+            case AGENT_LEVEL_1:
                 // 是一级代理
                 switch (query.getType()) {
                     case ACTIVATED:
@@ -72,9 +74,9 @@ public class PromoteAppService {
                         // 查询当前代理商发展的下级推广产生的分润
                         .eq(ClsMarketEtcAgentPromoteHistory::getAgent1Id, agent.getId()));
                 break;
-            case AgentRole.AGENT_LEVEL_2:
+            case AGENT_LEVEL_2:
                 // 是二级代理,在平台上没有分润信息
-            case AgentRole.AGENT_LEVEL_3:
+            case AGENT_LEVEL_3:
                 // 是三级代理,在平台上没有分润信息
                 return new Page<>();
         }

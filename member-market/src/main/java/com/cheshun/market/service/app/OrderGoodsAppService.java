@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.cheshun.market.domain.entity.enums.AgentRole.*;
+
 /**
  * @author wangzhuo
  * Created on 20210802
@@ -62,14 +64,14 @@ public class OrderGoodsAppService {
         }
         QueryWrapper<ClsMarketEtcAgentOrderGoods> queryWrapper = new QueryWrapper<>();
         switch (agent.getRole()) {
-            case AgentRole.STAFF:
+            case STAFF:
                 // 当前代理商是员工,返回空列表
-            case AgentRole.AGENT_LEVEL_2:
+            case AGENT_LEVEL_2:
                 // 当前代理商是二级代理商,返回空列表
-            case AgentRole.AGENT_LEVEL_3:
+            case AGENT_LEVEL_3:
                 // 当前代理商是三级代理商,返回空列表
                 return new Page<>();
-            case AgentRole.AGENT_LEVEL_1:
+            case AGENT_LEVEL_1:
                 // 当前代理商是一级代理商
                 queryWrapper.eq("og.agent_id", agent.getId());
                 break;
@@ -132,14 +134,14 @@ public class OrderGoodsAppService {
         QueryWrapper<ClsMarketEtcAgentOrderGoods> queryWrapper = new QueryWrapper<>();
         String snType = null;
         switch (agent.getRole()) {
-            case AgentRole.STAFF:
+            case STAFF:
                 // 当前代理商是员工,返回空列表
-            case AgentRole.AGENT_LEVEL_2:
+            case AGENT_LEVEL_2:
                 // 当前代理商是二级代理商,返回空列表
-            case AgentRole.AGENT_LEVEL_3:
+            case AGENT_LEVEL_3:
                 // 当前代理商是三级代理商,返回空列表
                 return new Page<>();
-            case AgentRole.AGENT_LEVEL_1:
+            case AGENT_LEVEL_1:
                 // 当前代理商是一级代理商
                 queryWrapper.eq("og.agent_id", agent.getId());
                 break;

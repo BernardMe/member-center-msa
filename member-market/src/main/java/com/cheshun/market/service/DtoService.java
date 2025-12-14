@@ -2,8 +2,6 @@ package com.cheshun.market.service;
 
 import com.cheshun.market.domain.entity.*;
 import com.cheshun.market.vo.dto.*;
-import com.zzjdyf.market.domain.entity.*;
-import com.zzjdyf.market.vo.dto.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
