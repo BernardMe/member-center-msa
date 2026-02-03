@@ -360,7 +360,7 @@ public class AdminEsSkuInfoServiceImpl implements AdminEsSkuInfoService {
         esSkuInfo.setGoodsCode(dto.getGoodsCode());
         esSkuInfo.setGoodsName(dto.getProductName());
         esSkuInfo.setSubTitle(dto.getSubTitle());
-        esSkuInfo.setRetailPrice(dto.getRetailPrice());
+        esSkuInfo.setRetailPrice(dto.getRetailPrice().getFen());
         esSkuInfo.setMainImage(dto.getMainImage());
         esSkuInfo.setStatus(dto.getStatus().byteValue());
         esSkuInfo.setIsB2c(CommontBooleanStatusType.NO.getCode());////设置isB2c=false
@@ -387,7 +387,7 @@ public class AdminEsSkuInfoServiceImpl implements AdminEsSkuInfoService {
         esSkuInfo.setGoodsCode(dto.getGoodsCode());
         esSkuInfo.setGoodsName(dto.getProductName());
         esSkuInfo.setSubTitle(dto.getSubTitle());
-        esSkuInfo.setRetailPrice(dto.getRetailPrice());
+        esSkuInfo.setRetailPrice(dto.getRetailPrice().getFen());
         esSkuInfo.setMainImage(dto.getMainImage());
         esSkuInfo.setStatus(dto.getStatus().byteValue());
         esSkuInfo.setIsB2c(CommontBooleanStatusType.YES.getCode());//设置isB2c=1

@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 @EnableConfigurationProperties(ThreadPoolConfigProperties.class)
-public class CLSThreadPoolConfig {
+public class CSThreadPoolConfig {
     @Bean("smsUnionExecutor")
     public ThreadPoolExecutor threadPoolExecutor(ThreadPoolConfigProperties properties) {
         return new ThreadPoolExecutor(

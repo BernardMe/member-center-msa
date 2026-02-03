@@ -37,7 +37,7 @@ public class EsSkuInfoVO {
      * 零售价(单位厘)
      */
     @ApiModelProperty("零售价(单位厘)")
-    private Integer retailPrice;
+    private Long retailPrice;
     /**
      * 商品主图
      */

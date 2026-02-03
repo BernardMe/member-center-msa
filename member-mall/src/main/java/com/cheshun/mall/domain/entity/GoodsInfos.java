@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  *
  * @TableName goods_infos
  */
-@TableName(value = "goods_infos")
+@TableName(value = "goods_infos", autoResultMap = true)
 @Data
 public class GoodsInfos {
     @TableId(value = "goods_id")
@@ -147,6 +147,6 @@ public class GoodsInfos {
     @TableField(value = "sku")
     private String sku;
 
-    @TableField(value = "retail_price")
-    private Integer retailPrice;
+    @TableField(value = "retail_price", typeHandler = MoneyFenTypeHandler.class)
+    private Money retailPrice;
 }

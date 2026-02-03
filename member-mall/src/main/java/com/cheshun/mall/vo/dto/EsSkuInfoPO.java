@@ -30,7 +30,7 @@ public class EsSkuInfoPO {
     /**
      * 零售价(单位厘)
      */
-    private Integer retailPrice;
+    private Long retailPrice;
     /**
      * 商品主图
      */

@@ -59,7 +59,7 @@ public class EsSkuInfo {
      * 零售价(单位厘)
      */
     @Field(type = FieldType.Integer)
-    private Integer retailPrice;
+    private Long retailPrice;
     /**
      * 商品主图
      */
@@ -206,11 +206,11 @@ public class EsSkuInfo {
         this.subTitle = subTitle;
     }
 
-    public Integer getRetailPrice() {
+    public Long getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(Integer retailPrice) {
+    public void setRetailPrice(Long retailPrice) {
         this.retailPrice = retailPrice;
     }
 

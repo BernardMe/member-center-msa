@@ -3,7 +3,7 @@ spring:
     active: dev
   cloud:
     bootstrap:
-      enabled: false
+      enabled: true
 
 
 
@@ -40,3 +40,37 @@ logging:
 knife4j:
   enable: true  # 开启 Knife4j（默认 true，可不写）
   production: false  # 是否生产环境（true 会禁用文档 ）
+cheshun:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: zzjadmin
+    # 设置jwt过期时间
+    admin-ttl: 7200000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: accessToken
+    user-secret-key: zzjmember
+    user-ttl: 7200000
+    user-token-name: accessToken
+  alioss:
+    endpoint: ${cheshun.alioss.endpoint}
+    access-key-id: ${cheshun.alioss.access-key-id}
+    access-key-secret: ${cheshun.alioss.access-key-secret}
+    bucket-name: ${cheshun.alioss.bucket-name}
+  wechat:
+    appid: ${cheshun.wechat.appid}
+    secret: ${cheshun.wechat.secret}
+    mchid: ${cheshun.wechat.mchid}
+    mchSerialNo: ${cheshun.wechat.mchSerialNo}
+    privateKeyFilePath: ${cheshun.wechat.privateKeyFilePath}
+    apiV3Key: ${cheshun.wechat.apiV3Key}
+    weChatPayCertFilePath: ${cheshun.wechat.weChatPayCertFilePath}
+    notifyUrl: ${cheshun.wechat.notifyUrl}
+    refundNotifyUrl: ${cheshun.wechat.refundNotifyUrl}
+  crm:
+    entid: ${cheshun.crm.entid}
+    baseurl: ${cheshun.crm.baseurl}
+  shop:
+  baidu-ocr:
+    #ocr配置API_KEY/SECRET_KEY
+    apiKey: ${zzj.baidu-ocr.apiKey}
+    secretKey: ${zzj.baidu-ocr.secretKey}

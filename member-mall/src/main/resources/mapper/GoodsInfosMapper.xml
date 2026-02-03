@@ -29,7 +29,7 @@
         <result property="goodsKeywords" column="goods_keywords" jdbcType="VARCHAR"/>
         <result property="spu" column="spu" jdbcType="VARCHAR"/>
         <result property="sku" column="sku" jdbcType="VARCHAR"/>
-        <result property="retailPrice" column="retail_price" jdbcType="INTEGER"/>
+        <result property="retailPrice" column="retail_price" jdbcType="BIGINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">

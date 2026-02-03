@@ -19,7 +19,7 @@ spring:
   application:
     name: member-mall
   redis:
-    host: 192.168.63.130
+    host: 192.168.1.130
     port: 6379
     database: 5
     password:
@@ -33,7 +33,7 @@ spring:
     discovery-client-enabled: false
   data:
     elasticsearch:
-      host: 192.168.63.130
+      host: 192.168.1.130
       port: 9200
   #采样取值介于 0到1之间，1则表示全部收集
   sleuth:
@@ -42,8 +42,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8858
-        namespace: 650fd323-0bc6-47ac-9594-25d07e490550
+        server-addr: 127.0.0.1:8868
+        namespace: 2b773ed8-54f8-4e3e-af60-e8f587c016fe
         username: nacos
         password: nacos
     sentinel:
@@ -58,12 +58,12 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
       # 数据库读写分离-读数据源
       slave:
-        url: jdbc:mysql://192.168.63.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        url: jdbc:mysql://192.168.1.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
         username: root
         password: root
       # 数据库读写分离-写数据源
       master:
-        url: jdbc:mysql://192.168.63.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        url: jdbc:mysql://192.168.1.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
         username: root
         password: root
     rules:
@@ -166,6 +166,14 @@ cheshun:
     corePoolSize: 10
     maxPoolSize: 20
     keepAliveTime: 300
+  data:
+    elasticsearch:
+      host: 192.168.1.130 # 生产：10.0.0.2
+      port: 9200 # 生产：9201
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    bucket-name: XXX-hyzx
+    part-size: 1024000
 
 custom:
   redis:
