@@ -1,0 +1,39 @@
+server:
+  port: 28081
+  servlet:
+    context-path: /inventory-service
+    session:
+      timeout: 30m
+
+spring:
+  application:
+    name: inventory-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8868
+        namespace: 2b773ed8-54f8-4e3e-af60-e8f587c016fe
+        username: nacos
+        password: nacos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.130:3306/tcc_inventory?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+logging:
+  level:
+    com.example.inventory: debug
