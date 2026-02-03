@@ -1,6 +1,6 @@
 package com.cheshun.order.feign;
 
-import com.result.Result;
+import com.cheshun.common.result.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

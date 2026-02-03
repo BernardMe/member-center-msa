@@ -1,8 +1,8 @@
 package com.cheshun.order.controller;
 
+import com.cheshun.common.result.Result;
 import com.cheshun.order.dto.CreateOrderRequest;
 import com.cheshun.order.service.OrderService;
-import com.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

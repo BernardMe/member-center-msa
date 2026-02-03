@@ -1,13 +1,13 @@
 package com.cheshun.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.cheshun.common.result.Result;
 import com.cheshun.order.dto.CreateOrderRequest;
 import com.cheshun.order.entity.Order;
 import com.cheshun.order.feign.InventoryFeignClient;
 import com.cheshun.order.mapper.OrderMapper;
 import com.cheshun.order.service.OrderService;
 import com.cheshun.tcc.common.enums.TccStatus;
-import com.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static com.result.Result.SUCC_CODE;
+import static com.cheshun.common.result.Result.SUCC_CODE;
 
 /**
  * 订单服务实现 - TCC 分布式事务
