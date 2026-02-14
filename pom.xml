@@ -26,6 +26,7 @@
         <module>netty-demo</module>
         <module>inventory-service</module>
         <module>order-service</module>
+        <module>price-service</module>
         <module>tcc-common</module>
     </modules>
 
@@ -37,7 +38,7 @@
         <fastjson>1.2.83</fastjson>
         <commons.lang>2.6</commons.lang>
         <druid>1.2.1</druid>
-        <pagehelper>1.3.0</pagehelper>
+        <pagehelper>1.4.7</pagehelper>
         <aliyun.sdk.oss>3.10.2</aliyun.sdk.oss>
         <activemq.version>5.17.6</activemq.version>
         <knife4j>3.0.2</knife4j>

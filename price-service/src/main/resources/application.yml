@@ -1,0 +1,59 @@
+server:
+  port: 28082
+  servlet:
+    context-path: /price-service
+    session:
+      timeout: 30m
+
+spring:
+  application:
+    name: price-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8868
+        namespace: 2b773ed8-54f8-4e3e-af60-e8f587c016fe
+        username: nacos
+        password: nacos
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.130:3306/ucan_price?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+#  task:
+#    scheduling:
+#      pool:
+#        size: 5
+
+mybatis-plus:
+  mapper-locations: classpath*:mappers/**/*Mapper.xml
+  type-aliases-package: com.cheshun.price.domain.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+# 爬虫配置
+#crawler:
+#  enabled: true
+#  timeout: 10000
+#  retry-count: 3
+#  request-interval: 2000
+#  platforms:
+#    taobao:
+#      enabled: true
+#    jd:
+#      enabled: true
+#    pdd:
+#      enabled: true
+
+logging:
+  level:
+    com.example.price: debug
