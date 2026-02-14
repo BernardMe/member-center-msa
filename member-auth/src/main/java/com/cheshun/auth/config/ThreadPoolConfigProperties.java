@@ -3,7 +3,7 @@ package com.cheshun.auth.config;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "zzjdyf.thread")
+@ConfigurationProperties(prefix = "cheshun.thread")
 @Data
 public class ThreadPoolConfigProperties {
     private int corePoolSize;

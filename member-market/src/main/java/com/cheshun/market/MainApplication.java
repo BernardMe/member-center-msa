@@ -12,7 +12,7 @@ import java.util.TimeZone;
  */
 @EnableDiscoveryClient
 @SpringBootApplication
-@EnableFeignClients(basePackages = {"com.zzjdyf.market.feign"})
+@EnableFeignClients(basePackages = {"com.cheshun.market.feign"})
 public class MainApplication {
     public static void main(String[] args) {
         // 在main方法里插入下面的代码以解决es的netty冲突问题

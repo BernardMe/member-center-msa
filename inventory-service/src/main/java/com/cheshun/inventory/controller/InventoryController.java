@@ -1,14 +1,14 @@
 package com.cheshun.inventory.controller;
 
+import com.cheshun.common.result.Result;
+import com.cheshun.common.tools.utils.ResultUtil;
 import com.cheshun.inventory.service.InventoryTccService;
 
-import com.result.Result;
-import com.tools.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import static com.result.Result.ERR_CODE;
+import static com.cheshun.common.result.Result.ERR_CODE;
 
 /**
  * 库存服务控制器

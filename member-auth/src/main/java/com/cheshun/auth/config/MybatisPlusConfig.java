@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //Spring boot方式
 @EnableTransactionManagement
 @Configuration
-@MapperScan("com.zzjdyf.auth.dao")
+@MapperScan("com.cheshun.auth.dao")
 public class MybatisPlusConfig {
 
     @Bean
