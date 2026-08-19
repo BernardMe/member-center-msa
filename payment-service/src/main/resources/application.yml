@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:payment_demo;MODE=MySQL
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# 第三方支付网关配置
+third-party-pay:
+  base-url: https://open.example-pay.com
+  app-id: ${PAY_APP_ID:demo_app_id}
+  app-secret: ${PAY_APP_SECRET:demo_secret}
+  notify-url: https://your-domain.com/api/internal/payment/callback
+
+# 支付状态轮询任务配置（作为回调兜底）
+payment:
+  poll:
+    enabled: true
+    fixed-delay-ms: 30000

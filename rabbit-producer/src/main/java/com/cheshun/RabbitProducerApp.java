@@ -1,0 +1,14 @@
+package com.cheshun;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * 启动程序，会创建对象，开始监听
+ */
+@SpringBootApplication
+public class RabbitProducerApp {
+    public static void main(String[] args) {
+        SpringApplication.run(RabbitProducerApp.class, args);
+    }
+}

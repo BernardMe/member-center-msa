@@ -15,11 +15,18 @@ spring:
         namespace: 2b773ed8-54f8-4e3e-af60-e8f587c016fe
         username: nacos
         password: nacos
+      config:
+        server-addr: 127.0.0.1:8868          # 和 discovery 保持一致
+        namespace: 2b773ed8-54f8-4e3e-af60-e8f587c016fe
+        username: nacos
+        password: nacos
+        file-extension: yaml                  # 配置中心里对应文件的后缀，按实际情况改（yaml/properties）
+        group: DEFAULT_GROUP
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.1.130:3306/tcc_inventory?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.1.5:3306/tcc_inventory?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
-    password: root
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initial-size: 5

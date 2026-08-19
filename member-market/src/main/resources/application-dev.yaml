@@ -14,7 +14,7 @@ spring:
       cluster-nodes: 127.0.0.1:9300
       cluster-name: elasticsearch
   redis:
-    host: 192.168.63.130
+    host: 192.168.1.130
     port: 6379
     database: 0
     password:
@@ -33,12 +33,12 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
       # 数据库读写分离-读数据源
       slave:
-        url: jdbc:mysql://192.168.63.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        url: jdbc:mysql://192.168.1.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
         username: root
         password: root
       # 数据库读写分离-写数据源
       master:
-        url: jdbc:mysql://192.168.63.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+        url: jdbc:mysql://192.168.1.130:3306/membercenter?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
         username: root
         password: root
     rules:
