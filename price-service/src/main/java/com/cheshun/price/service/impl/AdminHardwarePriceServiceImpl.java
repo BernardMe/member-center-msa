@@ -6,8 +6,12 @@ import com.cheshun.common.enumeration.OperationType;
 import com.cheshun.common.exception.BaseException;
 import com.cheshun.common.result.Result;
 import com.cheshun.common.tools.utils.ResultUtil;
+import com.cheshun.price.consts.CommonStatusEnum;
+import com.cheshun.price.domain.entity.GoodsType;
+import com.cheshun.price.domain.entity.GoodsTypeExample;
 import com.cheshun.price.domain.entity.HardwarePrice;
 import com.cheshun.price.domain.entity.HardwarePriceExample;
+import com.cheshun.price.mapper.GoodsTypeMapper;
 import com.cheshun.price.mapper.HardwarePriceMapper;
 import com.cheshun.price.domain.po.HardwarePricePO;
 import com.cheshun.price.service.AdminHardwarePriceService;
@@ -43,6 +47,8 @@ public class AdminHardwarePriceServiceImpl implements AdminHardwarePriceService 
 
     /*@Autowired
     private ElasticsearchTemplate elasticsearchTemplate;*/
+    @Autowired
+    private GoodsTypeMapper goodsTypeMapper;
     @Autowired
     private HardwarePriceMapper hardwarePriceMapper;
 
@@ -232,6 +238,27 @@ public class AdminHardwarePriceServiceImpl implements AdminHardwarePriceService 
 
 
 
+    }
+
+    @Override
+    public Result getGoodsTypeList(Byte status) {
+        //校验
+        if (!ObjectUtils.isEmpty(status) && ObjectUtils.isEmpty(CommonStatusEnum.getEnumByCode(status))) {
+            throw new BaseException("状态参数异常！");
+        }
+
+        GoodsTypeExample example = new GoodsTypeExample();
+        GoodsTypeExample.Criteria criteria = example.createCriteria();
+        if (!ObjectUtils.isEmpty(status)) {
+            criteria.andStatusEqualTo(status);
+        }
+
+        // 查询条件转换为DTO
+        List<GoodsType> goodsTypeList = goodsTypeMapper.selectByExample(example);
+        if (ObjectUtils.isEmpty(goodsTypeList)) {
+            return null;
+        }
+        return ResultUtil.listResult(goodsTypeList);
     }
 
     /**

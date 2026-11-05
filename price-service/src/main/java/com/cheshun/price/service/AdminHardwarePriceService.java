@@ -80,4 +80,9 @@ public interface AdminHardwarePriceService {
      */
     void batchDelete(List<HardwarePrice> hardwarePriceList);
 
+    /**
+     * 管理端：下拉框枚举查商品类型
+     * @param status
+     */
+    Result getGoodsTypeList(Byte status);
 }

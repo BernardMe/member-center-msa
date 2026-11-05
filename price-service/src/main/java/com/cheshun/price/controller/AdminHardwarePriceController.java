@@ -55,4 +55,10 @@ public class AdminHardwarePriceController {
     public Result deleteHardwarePrice(@RequestBody HardwarePriceVO hardwarePriceVO) {
         return adminHardwarePriceService.delete(hardwarePriceVO);
     }
+
+    @ApiOperation("后管-查询所有商品类型列表")
+    @GetMapping("/goods-type/list")
+    public Result getGoodsTypeList(@RequestParam(value = "status", required = false) Byte status) {
+        return adminHardwarePriceService.getGoodsTypeList(status);
+    }
 }

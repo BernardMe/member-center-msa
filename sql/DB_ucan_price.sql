@@ -9,6 +9,21 @@ CREATE DATABASE IF NOT EXISTS ucan_price DEFAULT CHARACTER SET utf8mb4 COLLATE u
 USE ucan_price;
 
 
+-- 商品类型表
+DROP TABLE IF EXISTS t_goods_type;
+CREATE TABLE t_goods_type (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键ID',
+    type_code VARCHAR(255) NOT NULL COMMENT '商品类型编码',
+    type_name VARCHAR(255) NOT NULL COMMENT '商品类型名称',
+    status TINYINT NOT NULL COMMENT '状态 1启用 2未启用',
+    is_delete TINYINT NOT NULL COMMENT '是否已删除 0正常 1已删除',
+    record_time DATETIME NOT NULL COMMENT '记录时间',
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    INDEX idx_type_code (type_code),
+    INDEX idx_record_time (record_time)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品类型表';
+
+
 -- 硬件商品报价表
 DROP TABLE IF EXISTS t_hardware_price;
 CREATE TABLE t_hardware_price (
